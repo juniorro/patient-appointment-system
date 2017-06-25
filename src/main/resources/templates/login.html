@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <link rel="shortcut icon" href="assets/ico/favicon.ico"/>
+
+    <title>SOLID HOMECARE, INC.</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet"/>
+
+    <!-- Custom styles for this template -->
+    <link href="assets/css/style.css" rel="stylesheet"/>
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet"/>
+    
+    <script src="assets/js/modernizr.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" th:href="@{/home}">SOLID HOMECARE, INC.</a>
+        </div>
+        <div class="navbar-collapse collapse navbar-right">
+          <ul class="nav navbar-nav">
+            <li><a th:href="@{/home}">HOME</a></li>
+            <li><a th:href="@{/about}">ABOUT</a></li>
+            <li><a th:href="@{/contact}">CONTACT</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">ACCOUNT<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li class="active"><a th:href="@{/login}">LOGIN</a></li>
+                <li><a th:href="@{/register}">REGISTER</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+	<!-- *****************************************************************************************************************
+	 BLUE WRAP
+	 ***************************************************************************************************************** -->
+	<div id="blue">
+	    <div class="container">
+			<div class="row">
+				<h3>Login.</h3>
+			</div><!-- /row -->
+	    </div> <!-- /container -->
+	</div><!-- /blue -->
+
+	<!-- *****************************************************************************************************************
+	 CONTACT FORMS
+	 ***************************************************************************************************************** -->
+
+	 <div class="container mtb">
+	 	<div class="row">
+	 		<div class="col-lg-6">
+	 			<h4>Please Log In</h4>
+	 			<div class="hline"></div>
+		 			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+		 			<form th:action="@{/processLogin}" method="post" role="form">
+					  <div class="form-group">
+					  <div th:if="${param.error != null}" class="alert alert-danger"
+								role="alert">
+								<strong>Incorrect username or password. Please try
+									again.</strong>
+							</div>
+							<div th:if="${param.logout != null}" class="alert alert-success"
+								role="alert">
+								<strong>You've been successfully logged out.</strong>
+							</div>
+							<div th:if="${success}" class="alert alert-success" role="alert">
+								<strong>Registration Success!! Please verify your email
+									address.</strong>
+							</div>
+							<div th:if="${resetmessage}" class="alert alert-success"
+								role="alert">
+								<strong>Success!! You have successfully reset your
+									password. Please log in.</strong>
+							</div>
+
+							<div th:if="${errorMessage}" class="alert alert-danger"
+								role="alert">
+								<strong>Error!! We don't recognize this link.</strong>
+							</div>
+
+							<div th:if="${errorMessage1}" class="alert alert-danger"
+								role="alert">
+								<strong>Error!! No account found.</strong>
+							</div>
+
+							<div th:if="${errorMessage2}" class="alert alert-danger"
+								role="alert">
+								<strong>Error!! This link has expired. Please reset
+									password again. </strong>
+							</div>
+
+							<div th:if="${wrongToken} or ${errorMessage}"
+								class="alert alert-danger" role="alert">
+								<strong>Error!! We don't recognize this link.</strong>
+							</div>
+
+							<div th:if="${recover}" class="alert alert-success" role="alert">
+								<strong>Please check your email to reset your password.</strong>
+							</div>
+
+							<div th:if="${tokenExpired}" class="alert alert-danger"
+								role="alert">
+								<strong>Link has expired. Please register again.</strong>
+							</div>
+
+							<div th:if="${tokenVerified}" class="alert alert-success"
+								role="alert">
+								<strong>Email verified successfully. Please log in.</strong>
+							</div>
+					    <label for="InputName1">User Name</label>
+					    <input type="text" name="username" placeholder="Username" class="form-control" id="exampleInputEmail1"/>
+					  </div>
+					  <div class="form-group">
+					    <label for="InputEmail1">Password</label>
+					    <input type="password" name="password" placeholder="Password" class="form-control" id="exampleInputEmail1"/>
+					  </div>
+					  <input type="submit" class="btn btn-theme" value="Login"/>
+					</form><br></br>
+					<a th:href="@{/recover}">Forgot Password?</a>
+			</div><!--/col-lg-8 -->
+	 		
+	 		<div class="col-lg-6">
+		 		<h4>Support</h4>
+		 		<div class="hline"></div>
+		 		<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+		 			<!-- <p>
+		 				Some Ave, 987,<br/>
+		 				23890, New York,<br/>
+		 				United States.<br/>
+		 			</p> -->
+		 			<p>
+		 				Email: hello@solidtheme.com<br/>
+		 				Tel: +34 8493-4893
+		 			</p>
+	 		</div>
+	 	</div><!--/row -->
+	 </div><!--/container -->
+
+
+	<!-- *****************************************************************************************************************
+	 FOOTER
+	 ***************************************************************************************************************** -->
+	 <div id="footerwrap">
+	 	<div class="container">
+		 	<div class="row">
+		 		<div class="col-lg-4">
+		 			<h4>About</h4>
+		 			<div class="hline-w"></div>
+		 			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+		 		</div>
+		 		<div class="col-lg-4">
+		 			<h4>Social Links</h4>
+		 			<div class="hline-w"></div>
+		 			<p>
+		 				<a href="#"><i class="fa fa-dribbble"></i></a>
+		 				<a href="#"><i class="fa fa-facebook"></i></a>
+		 				<a href="#"><i class="fa fa-twitter"></i></a>
+		 				<a href="#"><i class="fa fa-instagram"></i></a>
+		 				<a href="#"><i class="fa fa-tumblr"></i></a>
+		 			</p>
+		 		</div>
+		 		<div class="col-lg-4">
+		 			<h4>Our Bunker</h4>
+		 			<div class="hline-w"></div>
+		 			<p>
+		 				Some Ave, 987,<br/>
+		 				23890, New York,<br/>
+		 				United States.<br/>
+		 			</p>
+		 		</div>
+		 	
+		 	</div><!--/row -->
+	 	</div><!--/container -->
+	 </div><!--/footerwrap -->
+	 
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/retina-1.1.0.js"></script>
+	<script src="assets/js/jquery.hoverdir.js"></script>
+	<script src="assets/js/jquery.hoverex.min.js"></script>
+	<script src="assets/js/jquery.prettyPhoto.js"></script>
+  	<script src="assets/js/jquery.isotope.min.js"></script>
+  	<script src="assets/js/custom.js"></script>
+
+
+  </body>
+</html>
