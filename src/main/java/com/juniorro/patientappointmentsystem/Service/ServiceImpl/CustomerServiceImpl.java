@@ -1,5 +1,7 @@
 package com.juniorro.patientappointmentsystem.Service.ServiceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -61,6 +63,16 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public void saveConfirmCustomer(Customer customer) {
 		customerRepo.save(customer);
+	}
+
+	@Override
+	public List<Customer> allCustomers() {
+		return customerRepo.findAll();
+	}
+
+	@Override
+	public Customer getOne(Long id) {
+		return customerRepo.findOne(id);
 	}
 
 }

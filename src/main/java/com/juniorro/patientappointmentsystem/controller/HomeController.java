@@ -32,6 +32,7 @@ import com.juniorro.patientappointmentsystem.registrationlistener.OnRegistration
 @Controller
 public class HomeController {
 
+
 	@Autowired
 	private CustomerService customerService;
 	
@@ -49,15 +50,25 @@ public class HomeController {
 
 	@Autowired
 	private PasswordResetTokenService passwordResetTokenService;
+
+	@RequestMapping(value = "/home")
+	public String index() {
+		return "index";
+	}
 	
 	@RequestMapping(value = "/welcome")
-	public String index() {
+	public String welcome() {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/home")
-	public String home() {
-		return "index";
+	@RequestMapping(value = "/about")
+	public String about() {
+		return "about";
+	}
+	
+	@RequestMapping(value = "/contact")
+	public String contact() {
+		return "contact";
 	}
 
 	@RequestMapping(value = "/recover")
@@ -70,21 +81,10 @@ public class HomeController {
 		return "login";
 	}
 	
-	@RequestMapping(value = "/about")
-	public String about() {
-		return "about";
-	}
-	
-	@RequestMapping(value = "/contact")
-	public String contact() {
-		return "contact";
-	}
-	
-	@RequestMapping(value = "/resetPassword")
+	@RequestMapping(value = "/newpassword")
 	public String resetPassword() {
-		return "reset";
+		return "newpass";
 	}
-	
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String register(Model model) {
@@ -191,7 +191,7 @@ public class HomeController {
 				customerDetailsService.loadUserByUsername(customer.getUsername()).getAuthorities());
 		SecurityContextHolder.getContext().setAuthentication(auth);
 
-		return new ModelAndView("redirect:/resetPassword");
+		return new ModelAndView("redirect:/newpassword");
 	}
 	
 	
@@ -202,15 +202,14 @@ public class HomeController {
 			@RequestParam("confirmPassword") final String passwordConfirmation,
 			final RedirectAttributes redirect) {
 		if (password.equals("") || passwordConfirmation.equals("")) {
-			return new ModelAndView("resetPassword", "errorpass", true);
+			return new ModelAndView("newpass", "errorpass", true);
 		}
 		if (!password.equals(passwordConfirmation)) {
-			return new ModelAndView("resetPassword", "errorpassword", true);
+			return new ModelAndView("newpass", "errorpassword", true);
 		}
 		final Customer customer = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		passwordResetTokenService.changePassword(customer, password);
 		redirect.addFlashAttribute("resetmessage", true);
 		return new ModelAndView("redirect:/login");
 	}
-
 }

@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			"/js/**", "/login", "/home", "/about",
 			"/register", "/confirm", "/contact", 
 			"/recover/**", "/changePassword/**",
-			"/reset/**"};
+			"/reset/**", "/resetPassword"};
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {

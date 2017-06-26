@@ -1,10 +1,14 @@
 package com.juniorro.patientappointmentsystem.Service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import com.juniorro.patientappointmentsystem.model.Customer;
 
 @Service
 public interface CustomerService {
+
+	List<Customer> allCustomers();
 
 	Customer findByUsername(final String Customer);
 
@@ -20,6 +24,8 @@ public interface CustomerService {
 
 	Customer saveCustomer(final Customer customer);
 
-	void saveConfirmCustomer(Customer customer);	
+	void saveConfirmCustomer(Customer customer);
+
+	Customer getOne(Long id);	
 
 }
