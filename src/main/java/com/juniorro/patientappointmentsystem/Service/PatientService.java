@@ -16,7 +16,9 @@ public interface PatientService {
 
 	Patient findByEmail(final String email);
 
-	Patient findById(Long id);
+	Patient findById(final Long id);
+	
+	long count();
 
 	/*boolean checkUserExist(final String username, final String email);
 

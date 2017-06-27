@@ -81,7 +81,7 @@
               <ul class="dropdown-menu">
                 <li><a href="blog.html">NEW APPOINTMENT</a></li>
                 <li role="presentation" class="divider"></li>
-                <li><a href="single-post.html">SEARCH APPOINTMENT</a></li>
+                <li><a th:href="@{/appointments}">SEARCH APPOINTMENT</a></li>
                 <li role="presentation" class="divider"></li>
                 <li><a href="single-post.html">PENDING APPROVAL</a></li>
                 <!-- <li><a href="portfolio.html">PORTFOLIO</a></li>
@@ -121,93 +121,99 @@
         </div><!--/.nav-collapse -->
       </div>
     </div>
-	<!-- *****************************************************************************************************************
+    
+    <!-- *****************************************************************************************************************
 	 BLUE WRAP
 	 ***************************************************************************************************************** -->
 	<div id="blue">
 	    <div class="container">
 			<div class="row">
-				<h3>Edit User.</h3>
+				<h3>Appointments.</h3>
 			</div><!-- /row -->
 	    </div> <!-- /container -->
 	</div><!-- /blue -->
-
+	
+	
 	<!-- *****************************************************************************************************************
-	 CONTACT FORMS
+	 USER TABLE
 	 ***************************************************************************************************************** -->
-
-	 <div class="container mtb">
-	 	<div class="row">
-	 		<div class="col-lg-6">
-	 			<h4>Edit Customer</h4>
-	 			<div class="hline"></div>
-		 			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-		 			<div th:if="${updatedCustomer}" class="alert alert-success" role="alert">
-						<strong>Information updated successfully.</strong>
+	
+                
+            <div class="container">
+            
+            	<div class="row">
+        <div id="" class="filter-panel">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form class="form-inline" role="form">
+                       <div class="form-group">
+                            <label class="filter-col" style="margin-right:10;" for="pref-search">First Name:</label>
+                            <input type="text" class="form-control input-sm" id="pref-search"/>
+                        </div><!-- form group [search] -->
+                         <div class="form-group">
+                            <label class="filter-col" style="margin-right:10;" for="pref-search">Last Name:</label>
+                            <input type="text" class="form-control input-sm" id="pref-search"/>
+                        </div><!-- form group [search] -->
+                         <div class="form-group">
+                            <label class="filter-col" style="margin-right:10;" for="pref-search">SSN:</label>
+                            <input type="text" class="form-control input-sm" id="pref-search"/>
+                        </div><!-- form group [search] -->
+                        <div class="form-group">
+                            <label class="filter-col" style="margin-right:10;" for="pref-perpage">Status</label>
+                            <select id="pref-perpage" class="form-control">
+                                <option value="1">Active</option>
+                                <option value="0">Discharged</option>
+                            </select>                                
+                        </div> <!-- form group [rows] -->
+                    </form>
+                </div>
+            </div>
+        </div>    
+       </div>                
+            
+            
+            
+            
+                <div class="row">
+					<div class="col-sm-12">
+					<div th:if="${newPatientSuccess}" class="alert alert-success" role="alert">
+					<strong>New appointment added successfully.</strong>
 					</div>
-					<p th:if="${emailExist}" class="text-danger">
-							<b>Email already exists.</b>
-							</p>
-		 			<form th:action="@{/updateCustomer}" method="post" th:object="${customer}" role="form">
-		 			<div class="form-group">
-		 				<input type="hidden" th:field="*{id}" class="form-control" id="exampleInputEmail1"/>
-					    <label for="InputName1">First Name *</label>
-					    <b><span th:errors="*{firstName}" class="text-danger"></span></b>
-					    <input type="text" th:field="*{firstName}" class="form-control" id="exampleInputEmail1"/>
-					  </div>
-					  <div class="form-group">
-					    <label for="InputName1">Last Name *</label>
-					    <b><span th:errors="*{lastName}" class="text-danger"></span></b>
-					    <input type="text" th:field="*{lastName}" class="form-control" id="exampleInputEmail1"/>
-					  </div>
-					  <div class="form-group">
-					    <label for="InputName1">Phone *</label>
-					     <b><span th:errors="*{phone}" class="text-danger"></span></b>
-					    <input type="text" th:field="*{phone}" class="form-control" id="exampleInputEmail1"/>
-					  </div>
-					  <div class="form-group">
-					    <label for="InputName1">Email *</label>
-					     <b><span class="text-danger" th:errors="*{email}"></span></b>
-					     <p th:if="${emailExist}" class="text-danger">
-							<b>Email already exists.</b>
-							</p>
-					    <input type="email" th:field="*{email}" class="form-control" id="exampleInputEmail1"/>
-					  </div>
-					   <div class="form-group">
-					    <label for="InputName1">User Name *</label>
-					     <b><span class="text-danger" th:errors="*{username}" ></span></b>
-							<p th:if="${usernameExist}" class="text-danger">
-								<b>Username already exists.</b>
-							</p>
-					    <input type="text" th:field="*{username}" class="form-control" id="exampleInputEmail1"/>
-					  </div>
-					  <div class="form-group">
-					    <label for="InputEmail1">Enable *</label>
-					     <b><span th:errors="*{enabled}" class="text-danger"></span></b>
-					    <input type="text" th:field="*{enabled}" class="form-control" id="exampleInputEmail1"/>
-					  </div>
-					 <input type="hidden" th:field="*{password}" class="form-control" id="exampleInputEmail1"/>
-					  <input type="submit" value="Update" class="btn btn-theme"/>
-					</form>
-			</div><!--/col-lg-8 -->
-	 		
-	 		<div class="col-lg-6">
-		 		<h4>Support</h4>
-		 		<div class="hline"></div>
-		 		<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-		 			<!-- <p>
-		 				Some Ave, 987,<br/>
-		 				23890, New York,<br/>
-		 				United States.<br/>
-		 			</p> -->
-		 			<p>
-		 				Email: hello@solidtheme.com<br/>
-		 				Tel: +34 8493-4893
-		 			</p>
-	 		</div>
-	 	</div><!--/row -->
-	 </div><!--/container -->
-
+						<table id="example" class="table table-bordred table-striped table-bordered">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Doctor</th>
+									<th>Patient</th>
+									<th>Date</th>
+									<th>Note</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="appointment : ${appointments}">
+									<td th:text="${appointment.id}"></td>
+									<td>
+										<span th:text="${appointment.doctor.getFirstName()}"></span>
+										<span th:text="${appointment.doctor.getLastName()}"></span>
+									</td>
+									<td>
+										<span th:text="${appointment.patient.getFirstName()}"></span>
+										<span th:text="${appointment.patient.getLastName()}"></span>
+									</td>
+									<td th:text="${appointment.appointmentDate}"></td>
+									<td th:text="${appointment.note}"></td>
+									<td class="td-actions">
+									<a href="#" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-search"></span>View</a>
+									<a th:href="@{/edit(id=${appointment.id})}" class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+									<a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span>Remove</a>
+								</td>					
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				</div>
 
 	<!-- *****************************************************************************************************************
 	 FOOTER
@@ -256,7 +262,5 @@
 	<script src="assets/js/jquery.prettyPhoto.js"></script>
   	<script src="assets/js/jquery.isotope.min.js"></script>
   	<script src="assets/js/custom.js"></script>
-
-
   </body>
 </html>

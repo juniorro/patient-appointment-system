@@ -9,4 +9,6 @@ public interface PatientRepo extends JpaRepository<Patient, Long> {
 
 	Patient findByEmail(String email);
 	
+	long count();
+	
 }

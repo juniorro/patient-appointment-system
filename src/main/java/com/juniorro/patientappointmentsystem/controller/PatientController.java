@@ -44,12 +44,13 @@ public class PatientController {
 	}
 
 	@RequestMapping(value = "/saveNewPatient", method = RequestMethod.POST)
-	public ModelAndView saveNewPatient(@Valid Patient patient, BindingResult result, Model model) {
+	public ModelAndView saveNewPatient(@Valid Patient patient, BindingResult result, Model model, final RedirectAttributes redirect) {
 		if (result.hasErrors()) {
 			return new ModelAndView("newPatient");
 		} else {
-			final Patient newPatient = patientService.savePatient(patient);
-			return new ModelAndView("redirect:/patients", "newPatient", true);
+			patientService.savePatient(patient);
+			redirect.addFlashAttribute("newPatientSuccess", true);
+			return new ModelAndView("redirect:/patients");
 		}
 	}
 

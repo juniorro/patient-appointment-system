@@ -1,9 +1,12 @@
 package com.juniorro.patientappointmentsystem.controller;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.UUID;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.mail.SimpleMailMessage;
@@ -20,22 +23,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.juniorro.patientappointmentsystem.Service.CustomerDetailsService;
 import com.juniorro.patientappointmentsystem.Service.CustomerService;
 import com.juniorro.patientappointmentsystem.Service.PasswordResetTokenService;
+import com.juniorro.patientappointmentsystem.Service.PatientService;
 import com.juniorro.patientappointmentsystem.Service.VerificationTokenService;
 import com.juniorro.patientappointmentsystem.model.Customer;
 import com.juniorro.patientappointmentsystem.model.PasswordResetToken;
+import com.juniorro.patientappointmentsystem.model.Patient;
 import com.juniorro.patientappointmentsystem.model.VerificationToken;
 import com.juniorro.patientappointmentsystem.registrationlistener.OnRegistrationCompleteEvent;
 
 @Controller
 public class HomeController {
 
-
 	@Autowired
 	private CustomerService customerService;
-	
+
 	@Autowired
 	private CustomerDetailsService customerDetailsService;
 
@@ -50,22 +55,27 @@ public class HomeController {
 
 	@Autowired
 	private PasswordResetTokenService passwordResetTokenService;
+	
+	@Autowired
+	private PatientService patientService;
 
 	@RequestMapping(value = "/home")
 	public String index() {
 		return "index";
 	}
-	
+
 	@RequestMapping(value = "/welcome")
-	public String welcome() {
-		return "home";
+	public ModelAndView welcome() {
+		long counts = patientService.count();
+		System.out.println(counts);
+		return new ModelAndView("home", "counts", counts);
 	}
-	
+
 	@RequestMapping(value = "/about")
 	public String about() {
 		return "about";
 	}
-	
+
 	@RequestMapping(value = "/contact")
 	public String contact() {
 		return "contact";
@@ -80,7 +90,7 @@ public class HomeController {
 	public String login() {
 		return "login";
 	}
-	
+
 	@RequestMapping(value = "/newpassword")
 	public String resetPassword() {
 		return "newpass";
@@ -168,7 +178,6 @@ public class HomeController {
 		return new ModelAndView("redirect:/login");
 	}
 
-
 	@RequestMapping(value = "/changePassword", method = RequestMethod.GET)
 	public ModelAndView showChangePasswordPage(@RequestParam("id") final long id,
 			@RequestParam("token") final String token, final RedirectAttributes redirect) {
@@ -193,14 +202,11 @@ public class HomeController {
 
 		return new ModelAndView("redirect:/newpassword");
 	}
-	
-	
 
 	@RequestMapping(value = "/savePassword", method = RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView savePassword(@RequestParam("password") final String password,
-			@RequestParam("confirmPassword") final String passwordConfirmation,
-			final RedirectAttributes redirect) {
+			@RequestParam("confirmPassword") final String passwordConfirmation, final RedirectAttributes redirect) {
 		if (password.equals("") || passwordConfirmation.equals("")) {
 			return new ModelAndView("newpass", "errorpass", true);
 		}

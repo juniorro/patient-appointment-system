@@ -48,6 +48,11 @@ public class PatientServiceImpl implements PatientService {
 		return patientRepo.findOne(id);
 	}
 
+	@Override
+	public long count() {
+		return patientRepo.count();
+	}
+
 
 
 	}
