@@ -77,9 +77,9 @@
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown">APPOINTMENTS<b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><a href="blog.html">NEW APPOINTMENT</a></li>
+							<li><a th:href="@{/newAppointment}">NEW APPOINTMENT</a></li>
 							<li role="presentation" class="divider"></li>
-							<li><a href="single-post.html">SEARCH APPOINTMENT</a></li>
+							<li><a th:href="@{/appointments}">SEARCH APPOINTMENT</a></li>
 							<li role="presentation" class="divider"></li>
 							<li><a href="single-post.html">PENDING APPROVAL</a></li>
 							<!-- <li><a href="portfolio.html">PORTFOLIO</a></li>
@@ -107,7 +107,7 @@
 						data-toggle="dropdown">ACCOUNT <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li><a href="blog.html">PROFILE</a></li>
-							<li><a href="single-post.html">LOGOUT</a></li>
+							<li><a th:href="@{/logout}">LOGOUT</a></li>
 							<!-- <li><a href="portfolio.html">PORTFOLIO</a></li>
                 <li><a href="single-project.html">SINGLE PROJECT</a></li> -->
 						</ul></li>
@@ -116,94 +116,31 @@
 			<!--/.nav-collapse -->
 		</div>
 	</div>
+
 	<!-- *****************************************************************************************************************
-	 BLUE WRAP
+	 HEADERWRAP
 	 ***************************************************************************************************************** -->
-	<div id="blue">
+	<div id="headerwrap">
 		<div class="container">
-			<div class="row">
-				<h3>New Appointment.</h3>
-			</div>
-			<!-- /row -->
+
+			<section id="wrapper" class="error-page">
+				<div class="error-box">
+					<div class="error-body text-center">
+						<h1 class="text-danger">404</h1>
+						<h3 class="text-uppercase">Page Not Found! Access Denied</h3>
+						<p class="text-muted m-t-30 m-b-30">You Do Not Have Permission To View This Page</p>
+						<a th:href="@{/welcome}"
+							class="btn btn-danger btn-rounded waves-effect waves-light m-b-40">Back
+							to home</a>
+					</div>
+				</div>
+			</section>
+
+
 		</div>
 		<!-- /container -->
 	</div>
-	<!-- /blue -->
-
-	<!-- *****************************************************************************************************************
-	 CONTACT FORMS
-	 ***************************************************************************************************************** -->
-
-	<div class="container mtb">
-		<div class="row">
-			<div class="col-lg-6">
-				<h4>Edit Customer</h4>
-				<div class="hline"></div>
-				<p>Lorem Ipsum is simply dummy text of the printing and
-					typesetting industry. Lorem Ipsum has been the industry's standard
-					dummy text ever since the 1500s.</p>
-				<div th:if="${updatedCustomer}" class="alert alert-success"
-					role="alert">
-					<strong>Information updated successfully.</strong>
-				</div>
-				<p th:if="${emailExist}" class="text-danger">
-					<b>Email already exists.</b>
-				</p>
-				<form th:action="@{/saveNewAppointment}" method="post"
-					th:object="${appointment}" role="form">
-					<div class="form-group">
-						<label for="InputName1">Appointment Date *</label> <b><span
-							th:errors="*{appointmentDate}" class="text-danger"></span></b> <input
-							type="date" th:field="*{appointmentDate}" class="form-control"
-							id="exampleInputEmail1" />
-					 </div>
-
-						<div class="form-group">
-							<label for="InputEmail1">Doctor *</label> <b><span
-								th:errors="*{doctor}" class="text-danger"></span></b>
-							<select	th:field="*{doctor}" class="form-control">
-								<option th:each="doctor : ${doctors}"  th:value="${doctor.getId()}" th:text="${doctor.getFirstName() + ' ' + doctor.getLastName()}"></option>
-							</select>
-						</div>
-						
-						<div class="form-group">
-							<label for="InputEmail1">Patient *</label> <b><span
-								th:errors="*{patient}" class="text-danger"></span></b>
-							<select	th:field="*{patient}" class="form-control">
-								<option th:each="patient : ${patients}"  th:value="${patient.getId()}" th:text="${patient.getFirstName() + ' ' + patient.getLastName()}"></option>
-							</select>
-						</div>
-
-						<div class="form-group">
-							<label for="InputName1">Note</label> <textarea rows="6" type="text"
-								th:field="*{note}" class="form-control" id="exampleInputEmail1" ></textarea>
-						</div>
-						
-						<input type="submit" class="btn btn-theme" value="Save"/>
-				</form>
-			</div>
-			<!--/col-lg-8 -->
-
-			<div class="col-lg-6">
-				<h4>Support</h4>
-				<div class="hline"></div>
-				<p>Lorem Ipsum is simply dummy text of the printing and
-					typesetting industry. Lorem Ipsum has been the industry's standard
-					dummy text ever since the 1500s.</p>
-				<!-- <p>
-		 				Some Ave, 987,<br/>
-		 				23890, New York,<br/>
-		 				United States.<br/>
-		 			</p> -->
-				<p>
-					Email: hello@solidtheme.com<br /> Tel: +34 8493-4893
-				</p>
-			</div>
-		</div>
-		<!--/row -->
-	</div>
-	<!--/container -->
-
+	<!-- /headerwrap -->
 
 	<!-- *****************************************************************************************************************
 	 FOOTER
@@ -258,5 +195,89 @@
 	<script src="assets/js/custom.js"></script>
 
 
+	<script>
+		// Portfolio
+		(function($) {
+			"use strict";
+			var $container = $('.portfolio'),
+				$items = $container.find('.portfolio-item'),
+				portfolioLayout = 'fitRows';
+	
+			if ($container.hasClass('portfolio-centered')) {
+				portfolioLayout = 'masonry';
+			}
+	
+			$container.isotope({
+				filter : '*',
+				animationEngine : 'best-available',
+				layoutMode : portfolioLayout,
+				animationOptions : {
+					duration : 750,
+					easing : 'linear',
+					queue : false
+				},
+				masonry : {
+				}
+			}, refreshWaypoints());
+	
+			function refreshWaypoints() {
+				setTimeout(function() {}, 1000);
+			}
+	
+			$('nav.portfolio-filter ul a').on('click', function() {
+				var selector = $(this).attr('data-filter');
+				$container.isotope({
+					filter : selector
+				}, refreshWaypoints());
+				$('nav.portfolio-filter ul a').removeClass('active');
+				$(this).addClass('active');
+				return false;
+			});
+	
+			function getColumnNumber() {
+				var winWidth = $(window).width(),
+					columnNumber = 1;
+	
+				if (winWidth > 1200) {
+					columnNumber = 5;
+				} else if (winWidth > 950) {
+					columnNumber = 4;
+				} else if (winWidth > 600) {
+					columnNumber = 3;
+				} else if (winWidth > 400) {
+					columnNumber = 2;
+				} else if (winWidth > 250) {
+					columnNumber = 1;
+				}
+				return columnNumber;
+			}
+	
+			function setColumns() {
+				var winWidth = $(window).width(),
+					columnNumber = getColumnNumber(),
+					itemWidth = Math.floor(winWidth / columnNumber);
+	
+				$container.find('.portfolio-item').each(function() {
+					$(this).css({
+						width : itemWidth + 'px'
+					});
+				});
+			}
+	
+			function setPortfolio() {
+				setColumns();
+				$container.isotope('reLayout');
+			}
+	
+			$container.imagesLoaded(function() {
+				setPortfolio();
+			});
+	
+			$(window).on('resize', function() {
+				setPortfolio();
+			});
+		})(jQuery);
+	</script>
 </body>
 </html>
+

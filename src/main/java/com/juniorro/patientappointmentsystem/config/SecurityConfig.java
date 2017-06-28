@@ -26,18 +26,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			"/register", "/confirm", "/contact", 
 			"/recover/**", "/changePassword/**",
 			"/reset/**", "/resetPassword"};
+	private static final String[] SECURE_ANT_MATCHERS = {"/newUser/**", "/accessDenied"};
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers(PUBLIC_ANT_MATCHERS).permitAll().anyRequest().authenticated();
+		http.authorizeRequests().antMatchers(PUBLIC_ANT_MATCHERS).permitAll().anyRequest().authenticated()
+		.antMatchers(SECURE_ANT_MATCHERS).access("hasRole('ADMIN')")
+		.and().exceptionHandling().accessDeniedPage("/accessDenied");
 
 		http.csrf().disable().cors().disable().formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/welcome")
-				.loginProcessingUrl("/processLogin").failureUrl("/login?error").and()
-				
-				.logout().logoutUrl("/logout").permitAll()                                            
-				.logoutSuccessUrl("/login?logout")                                       
-				.invalidateHttpSession(true)                                             
-				.deleteCookies("remember-me").and().rememberMe();
+				.loginProcessingUrl("/processLogin").failureUrl("/login?error");
+		/*
+		.logout().logoutUrl("/logout").permitAll()                                            
+		.logoutSuccessUrl("/login?logout")                                       
+		.invalidateHttpSession(true)                                             
+		.deleteCookies("remember-me").and().rememberMe()*/
 	}
 
 }

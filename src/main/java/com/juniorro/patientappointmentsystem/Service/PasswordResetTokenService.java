@@ -2,8 +2,9 @@ package com.juniorro.patientappointmentsystem.Service;
 
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
+
 import com.juniorro.patientappointmentsystem.model.Customer;
-import com.juniorro.patientappointmentsystem.model.PasswordResetToken;
+import com.juniorro.patientappointmentsystem.model.security.PasswordResetToken;
 
 @Service
 public interface PasswordResetTokenService {

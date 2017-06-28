@@ -138,50 +138,16 @@
 	 USER TABLE
 	 ***************************************************************************************************************** -->
 	
-                
-            <div class="container">
-            
-            	<div class="row">
-        <div id="" class="filter-panel">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <form class="form-inline" role="form">
-                       <div class="form-group">
-                            <label class="filter-col" style="margin-right:10;" for="pref-search">First Name:</label>
-                            <input type="text" class="form-control input-sm" id="pref-search"/>
-                        </div><!-- form group [search] -->
-                         <div class="form-group">
-                            <label class="filter-col" style="margin-right:10;" for="pref-search">Last Name:</label>
-                            <input type="text" class="form-control input-sm" id="pref-search"/>
-                        </div><!-- form group [search] -->
-                         <div class="form-group">
-                            <label class="filter-col" style="margin-right:10;" for="pref-search">SSN:</label>
-                            <input type="text" class="form-control input-sm" id="pref-search"/>
-                        </div><!-- form group [search] -->
-                        <div class="form-group">
-                            <label class="filter-col" style="margin-right:10;" for="pref-perpage">Status</label>
-                            <select id="pref-perpage" class="form-control">
-                                <option value="1">Active</option>
-                                <option value="0">Discharged</option>
-                            </select>                                
-                        </div> <!-- form group [rows] -->
-                    </form>
-                </div>
-            </div>
-        </div>    
-       </div>                
-            
-            
-            
-            
-                <div class="row">
+          <div class="container">
+          	<div class="row">
 					<div class="col-sm-12">
 					<div th:if="${newPatientSuccess}" class="alert alert-success" role="alert">
 					<strong>New patient added successfully.</strong>
 					</div>
-						<table id="example" class="table table-bordred table-striped table-bordered">
+						<table id="dataTables-example" class="table table-bordred table-striped table-bordered">
 							<thead>
 								<tr>
+									<th>Patient ID</th>
 									<th>First Name</th>
 									<th>Last Name</th>
 									<th>Phone</th>
@@ -193,6 +159,7 @@
 							</thead>
 							<tbody>
 								<tr th:each="patient : ${patients}">
+									<td th:text="${patient.id}"></td>
 									<td th:text="${patient.firstName}"></td>
 									<td th:text="${patient.lastName}"></td>
 									<td th:text="${patient.phone}"></td>									
@@ -250,13 +217,22 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
 	<script src="assets/js/retina-1.1.0.js"></script>
 	<script src="assets/js/jquery.hoverdir.js"></script>
 	<script src="assets/js/jquery.hoverex.min.js"></script>
 	<script src="assets/js/jquery.prettyPhoto.js"></script>
   	<script src="assets/js/jquery.isotope.min.js"></script>
-  	<script src="assets/js/custom.js"></script>
+  	<script src="assets/js/custom.js"></script> -->
+  	
+  	 <!-- DATA TABLE SCRIPTS -->
+    <script src="assets/js/jquery.dataTables.js"></script>
+    <script src="assets/js/dataTables.bootstrap.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#dataTables-example').dataTable();
+            });
+    </script>
   </body>
 </html>

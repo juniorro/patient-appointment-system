@@ -1,8 +1,9 @@
 package com.juniorro.patientappointmentsystem.Service;
 
 import org.springframework.stereotype.Service;
+
 import com.juniorro.patientappointmentsystem.model.Customer;
-import com.juniorro.patientappointmentsystem.model.VerificationToken;
+import com.juniorro.patientappointmentsystem.model.security.VerificationToken;
 
 @Service
 public interface VerificationTokenService {

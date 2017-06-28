@@ -1,7 +1,8 @@
 package com.juniorro.patientappointmentsystem.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.juniorro.patientappointmentsystem.model.VerificationToken;
+
+import com.juniorro.patientappointmentsystem.model.security.VerificationToken;
 
 public interface VerificationTokenRepo extends JpaRepository<VerificationToken, Long> {
 

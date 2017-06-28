@@ -1,4 +1,4 @@
-package com.juniorro.patientappointmentsystem.model;
+package com.juniorro.patientappointmentsystem.model.security;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import com.juniorro.patientappointmentsystem.model.Customer;
 
 @Entity
 public class PasswordResetToken {

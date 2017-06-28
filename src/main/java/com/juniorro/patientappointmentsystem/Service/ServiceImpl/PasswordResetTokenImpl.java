@@ -5,11 +5,12 @@ import org.springframework.core.env.Environment;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.juniorro.patientappointmentsystem.repo.CustomerRepo;
-import com.juniorro.patientappointmentsystem.repo.PasswordResetTokenRepo;
+
 import com.juniorro.patientappointmentsystem.Service.PasswordResetTokenService;
 import com.juniorro.patientappointmentsystem.model.Customer;
-import com.juniorro.patientappointmentsystem.model.PasswordResetToken;
+import com.juniorro.patientappointmentsystem.model.security.PasswordResetToken;
+import com.juniorro.patientappointmentsystem.repo.CustomerRepo;
+import com.juniorro.patientappointmentsystem.repo.PasswordResetTokenRepo;
 
 @Service
 @Transactional

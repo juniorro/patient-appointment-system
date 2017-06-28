@@ -1,5 +1,7 @@
-package com.juniorro.patientappointmentsystem.model;
+package com.juniorro.patientappointmentsystem.model.security;
 
+import java.util.Calendar;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -7,8 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import java.util.Calendar;
-import java.util.Date;
+import com.juniorro.patientappointmentsystem.model.Customer;
 
 @Entity
 public class VerificationToken {

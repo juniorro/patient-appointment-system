@@ -1,15 +1,28 @@
 package com.juniorro.patientappointmentsystem.model;
 
-import java.util.Calendar;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.juniorro.patientappointmentsystem.model.security.Authority;
+import com.juniorro.patientappointmentsystem.model.security.UserRole;
 
 @Entity
-public class Customer {
+public class Customer implements UserDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,13 +47,27 @@ public class Customer {
 	@NotEmpty(message = "Phone is required")
 	private String phone;
 
-	private boolean enabled;
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JsonIgnore
+	private Set<UserRole> customerRoles = new HashSet<>();
 
-	private Calendar created = Calendar.getInstance();
+	private boolean enabled;
 
 	public Customer() {
 		super();
-		this.enabled = false;
+	}
+
+	public Customer(String username, String password, String firstName, String lastName, String email, String phone,
+			Set<UserRole> customerRoles, boolean enabled) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.phone = phone;
+		this.customerRoles = customerRoles;
+		this.enabled = enabled;
 	}
 
 	public Long getId() {
@@ -99,6 +126,14 @@ public class Customer {
 		this.phone = phone;
 	}
 
+	public Set<UserRole> getCustomerRoles() {
+		return customerRoles;
+	}
+
+	public void setCustomerRoles(Set<UserRole> customerRoles) {
+		this.customerRoles = customerRoles;
+	}
+
 	public boolean isEnabled() {
 		return enabled;
 	}
@@ -107,19 +142,26 @@ public class Customer {
 		this.enabled = enabled;
 	}
 
-	public Calendar getCreated() {
-		return created;
-	}
-
-	public void setCreated(Calendar created) {
-		this.created = created;
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		Set<GrantedAuthority> authorites = new HashSet<>();
+		customerRoles.forEach(ur -> authorites.add(new Authority(ur.getRole().getName())));
+		return authorites;
 	}
 
 	@Override
-	public String toString() {
-		return "Customer [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", email=" + email + ", phone=" + phone + ", enabled=" + enabled
-				+ ", created=" + created + "]";
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
 	}
 
 }
