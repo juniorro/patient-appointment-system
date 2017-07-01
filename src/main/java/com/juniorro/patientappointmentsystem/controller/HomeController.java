@@ -1,6 +1,8 @@
 package com.juniorro.patientappointmentsystem.controller;
 
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,9 +32,11 @@ import com.juniorro.patientappointmentsystem.Service.CustomerDetailsService;
 import com.juniorro.patientappointmentsystem.Service.CustomerService;
 import com.juniorro.patientappointmentsystem.Service.PasswordResetTokenService;
 import com.juniorro.patientappointmentsystem.Service.PatientService;
+import com.juniorro.patientappointmentsystem.Service.RoleService;
 import com.juniorro.patientappointmentsystem.Service.VerificationTokenService;
 import com.juniorro.patientappointmentsystem.model.Customer;
 import com.juniorro.patientappointmentsystem.model.security.PasswordResetToken;
+import com.juniorro.patientappointmentsystem.model.security.UserRole;
 import com.juniorro.patientappointmentsystem.model.security.VerificationToken;
 import com.juniorro.patientappointmentsystem.registrationlistener.OnRegistrationCompleteEvent;
 
@@ -41,6 +45,9 @@ public class HomeController {
 
 	@Autowired
 	private CustomerService customerService;
+	
+	@Autowired
+	private RoleService roleService;
 
 	@Autowired
 	private CustomerDetailsService customerDetailsService;
@@ -146,8 +153,10 @@ public class HomeController {
 		}
 
 		else {
+			Set<UserRole> userRoles = new HashSet<>();
+			userRoles.add(new UserRole(customer, roleService.findByName("ROLE_ADMIN")));
 			customer.setEnabled(false);
-			final Customer newcustomer = customerService.saveCustomer(customer);
+			final Customer newcustomer = customerService.saveCustomer(customer, userRoles);
 			final String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort()
 					+ request.getContextPath();
 			eventPublisher.publishEvent(new OnRegistrationCompleteEvent(newcustomer, appUrl));
@@ -174,7 +183,7 @@ public class HomeController {
 		}
 		final Customer customer = verificationToken.getCustomer();
 		customer.setEnabled(true);
-		customerService.saveCustomer(customer);
+		customerService.saveConfirmCustomer(customer);
 		redirect.addFlashAttribute("tokenVerified", true);
 		return "redirect:/login";
 	}

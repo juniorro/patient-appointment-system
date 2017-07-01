@@ -1,9 +1,10 @@
 package com.juniorro.patientappointmentsystem.Service;
 
 import java.util.List;
-
+import java.util.Set;
 import org.springframework.stereotype.Service;
 import com.juniorro.patientappointmentsystem.model.Customer;
+import com.juniorro.patientappointmentsystem.model.security.UserRole;
 
 @Service
 public interface CustomerService {
@@ -22,7 +23,7 @@ public interface CustomerService {
 
 	boolean checkEmailExist(final String email);
 
-	Customer saveCustomer(final Customer customer);
+	Customer saveCustomer(final Customer customer, Set<UserRole> userRoles);
 
 	void saveConfirmCustomer(Customer customer);
 

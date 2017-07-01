@@ -1,13 +1,15 @@
 package com.juniorro.patientappointmentsystem.Service.ServiceImpl;
 
 import java.util.List;
-
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.juniorro.patientappointmentsystem.repo.CustomerRepo;
 import com.juniorro.patientappointmentsystem.Service.CustomerService;
+import com.juniorro.patientappointmentsystem.Service.RoleService;
 import com.juniorro.patientappointmentsystem.model.Customer;
+import com.juniorro.patientappointmentsystem.model.security.UserRole;
+import com.juniorro.patientappointmentsystem.repo.CustomerRepo;
 
 @Service
 @Transactional
@@ -15,6 +17,9 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
 	CustomerRepo customerRepo;
+	
+	@Autowired
+	private RoleService roleService;
 
 	@Override
 	public Customer findByUsername(String username) {
@@ -32,8 +37,13 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Customer saveCustomer(final Customer customer) {
-		return customerRepo.save(customer);
+	public Customer saveCustomer(final Customer customer, Set<UserRole> userRoles) {
+		 for (UserRole roles : userRoles) {
+             roleService.save(roles.getRole());
+         }		 
+		 customer.getCustomerRoles().addAll(userRoles);
+		 customerRepo.save(customer);
+		return customer;
 	}
 
 	public boolean checkUsernameExist(String username) {

@@ -26,12 +26,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			"/register", "/confirm", "/contact", 
 			"/recover/**", "/changePassword/**",
 			"/reset/**", "/resetPassword"};
-	private static final String[] SECURE_ANT_MATCHERS = {"/newUser/**", "/accessDenied"};
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers(PUBLIC_ANT_MATCHERS).permitAll().anyRequest().authenticated()
-		.antMatchers(SECURE_ANT_MATCHERS).access("hasRole('ADMIN')")
 		.and().exceptionHandling().accessDeniedPage("/accessDenied");
 
 		http.csrf().disable().cors().disable().formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/welcome")

@@ -1,10 +1,10 @@
 package com.juniorro.patientappointmentsystem.controller;
 
+import java.util.HashSet;
 import java.util.List;
-
+import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
@@ -15,13 +15,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.juniorro.patientappointmentsystem.Service.CustomerService;
+import com.juniorro.patientappointmentsystem.Service.RoleService;
 import com.juniorro.patientappointmentsystem.model.Customer;
+import com.juniorro.patientappointmentsystem.model.security.UserRole;
 import com.juniorro.patientappointmentsystem.registrationlistener.OnRegistrationCompleteEvent;
 
 @Controller
 public class UserController {
 	@Autowired
 	private CustomerService customerService;
+	
+	@Autowired
+	private RoleService roleService;
 	
 	@Autowired
 	private ApplicationEventPublisher eventPublisher;
@@ -63,8 +68,10 @@ public class UserController {
 		if (result.hasErrors()) {
 			return "newCustomer";
 		} else {
+			Set<UserRole> userRoles = new HashSet<>();
+			userRoles.add(new UserRole(customer, roleService.findByName("ROLE_ADMIN")));
 			customer.setEnabled(false);
-			final Customer newcustomer = customerService.saveCustomer(customer);
+			final Customer newcustomer = customerService.saveCustomer(customer, userRoles);
 			final String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort()
 					+ request.getContextPath();
 			eventPublisher.publishEvent(new OnRegistrationCompleteEvent(newcustomer, appUrl));
@@ -78,7 +85,7 @@ public class UserController {
 		if (result.hasErrors()) {
 			return new ModelAndView("editCustomer");
 		} else {
-			customerService.saveCustomer(customer);
+			customerService.saveConfirmCustomer(customer);
 			return new ModelAndView("editCustomer", "updatedCustomer", true);
 		}
 	}
