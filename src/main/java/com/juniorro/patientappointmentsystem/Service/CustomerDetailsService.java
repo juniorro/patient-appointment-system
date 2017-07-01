@@ -15,7 +15,7 @@ import com.juniorro.patientappointmentsystem.model.Customer;
 @Service
 public class CustomerDetailsService implements UserDetailsService {
 	
-	private static final String ROLE_USER = "ROLE_USER";
+	//private static final String ROLE_USER = "ROLE_USER";
 	
 	@Autowired
 	private CustomerService customerService;
@@ -26,7 +26,7 @@ public class CustomerDetailsService implements UserDetailsService {
 		if (customer == null){
 			throw new UsernameNotFoundException ("No user was found with username " + username);
 		}
-		return new User(customer.getUsername(), customer.getPassword(), customer.isEnabled(), true, true, true, getAuthoriries(ROLE_USER));
+		return new User(customer.getUsername(), customer.getPassword(), customer.isEnabled(), true, true, true, getAuthoriries(customer.getAuthorities().toString()));
 	}
 
 	private Collection<? extends GrantedAuthority> getAuthoriries(String role) {
