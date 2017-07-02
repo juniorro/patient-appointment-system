@@ -1,6 +1,7 @@
 package com.juniorro.patientappointmentsystem.model;
 
 import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,7 +13,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -22,33 +22,39 @@ public class Appointment {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@DateTimeFormat(pattern="yyyy-MM-dd")
-	@Temporal(TemporalType.DATE)
-	@NotNull(message = "Time is required")
-	private Date appointmentDate;
+	@DateTimeFormat(pattern="MM/dd/yyyy h:m a")
+	@Temporal(TemporalType.TIMESTAMP)
+	@NotNull(message = "From Date is required")
+	private Date fromDate;
+	
+	@DateTimeFormat(pattern="MM/dd/yyyy h:m a")
+	@Temporal(TemporalType.TIMESTAMP)
+	@NotNull(message = "To date is required")
+	private Date toDate;
 
 	private String note;
-
-	@NotNull(message = "Doctor is required")
-	@OneToOne
-	private Doctor doctor;
 
 	@NotNull(message = "Patient is required")
 	@ManyToOne
 	@JoinColumn(name = "patient_id")
 	private Patient patient;
+	
+	@NotNull(message = "Physician is required")
+	@ManyToOne
+	@JoinColumn(name = "physician_id")
+	private Physician physician;
 
 	public Appointment() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Appointment(Date appointmentDate, String note, Doctor doctor, Patient patient) {
+	public Appointment(Date fromDate, Date toDate, String note, Patient patient, Physician physician) {
 		super();
-		this.appointmentDate = appointmentDate;
+		this.fromDate = fromDate;
+		this.toDate = toDate;
 		this.note = note;
-		this.doctor = doctor;
 		this.patient = patient;
+		this.physician = physician;
 	}
 
 	public Long getId() {
@@ -59,12 +65,20 @@ public class Appointment {
 		this.id = id;
 	}
 
-	public Date getAppointmentDate() {
-		return appointmentDate;
+	public Date getFromDate() {
+		return fromDate;
 	}
 
-	public void setAppointmentDate(Date appointmentDate) {
-		this.appointmentDate = appointmentDate;
+	public void setFromDate(Date fromDate) {
+		this.fromDate = fromDate;
+	}
+
+	public Date getToDate() {
+		return toDate;
+	}
+
+	public void setToDate(Date toDate) {
+		this.toDate = toDate;
 	}
 
 	public String getNote() {
@@ -75,14 +89,6 @@ public class Appointment {
 		this.note = note;
 	}
 
-	public Doctor getDoctor() {
-		return doctor;
-	}
-
-	public void setDoctor(Doctor doctor) {
-		this.doctor = doctor;
-	}
-
 	public Patient getPatient() {
 		return patient;
 	}
@@ -90,7 +96,13 @@ public class Appointment {
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
-	
-	
+
+	public Physician getPhysician() {
+		return physician;
+	}
+
+	public void setPhysician(Physician physician) {
+		this.physician = physician;
+	}
 
 }

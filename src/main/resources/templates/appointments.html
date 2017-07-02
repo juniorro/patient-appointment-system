@@ -29,7 +29,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12">
-					<div th:if="${newPatientSuccess}" class="alert alert-success"
+					<div th:if="${newAppointmentSuccess}" class="alert alert-success"
 						role="alert">
 						<strong>New appointment added successfully.</strong>
 					</div>
@@ -48,8 +48,8 @@
 						<tbody>
 							<tr th:each="appointment : ${appointments}">
 								<td th:text="${appointment.id}"></td>
-								<td><span th:text="${appointment.doctor.getFirstName()}"></span>
-									<span th:text="${appointment.doctor.getLastName()}"></span></td>
+								<td><span th:text="${appointment.physician.getFirstName()}"></span>
+									<span th:text="${appointment.physician.getLastName()}"></span></td>
 								<td><span th:text="${appointment.patient.getFirstName()}"></span>
 									<span th:text="${appointment.patient.getLastName()}"></span></td>
 								<td th:text="${appointment.appointmentDate}"></td>

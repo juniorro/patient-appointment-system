@@ -1,22 +1,18 @@
 package com.juniorro.patientappointmentsystem.model;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-public class Doctor {
-	
+public class Physician {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -33,32 +29,24 @@ public class Doctor {
 
 	@NotEmpty(message = "Address is required")
 	private String address;
-	
+
 	@NotEmpty(message = "Phone is required")
 	private String phone;
 	
-	@ManyToOne
-	@JoinColumn(name = "patient_id")
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Patient patient;
-	
-	@OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Appointment> appointment;
 
-	public Doctor() {
+	public Physician() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Doctor(String firstName, String lastName, String email, String address, String phone, Patient patient,
-			List<Appointment> appointment) {
+	public Physician(String firstName, String lastName, String email, String address, String phone) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.address = address;
 		this.phone = phone;
-		this.patient = patient;
-		this.appointment = appointment;
 	}
 
 	public Long getId() {
@@ -108,23 +96,5 @@ public class Doctor {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
-	public Patient getPatient() {
-		return patient;
-	}
-
-	public void setPatient(Patient patient) {
-		this.patient = patient;
-	}
-
-	public List<Appointment> getAppointment() {
-		return appointment;
-	}
-
-	public void setAppointment(List<Appointment> appointment) {
-		this.appointment = appointment;
-	}
-	
-	
 
 }

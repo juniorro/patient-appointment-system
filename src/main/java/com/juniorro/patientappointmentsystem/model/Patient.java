@@ -48,7 +48,7 @@ public class Patient {
 	private Date dateOfBirth;
 
 	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Doctor> doctor;
+	private List<Physician> physician;
 
 	/* @NotEmpty(message = "Clinical department is required") */
 	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -71,7 +71,7 @@ public class Patient {
 	}
 
 	public Patient(String firstName, String lastName, String phone, String email, String address, Date dateOfBirth,
-			List<Doctor> doctor, List<ClinicalDepartment> cinicalDepartment, List<Appointment> appointment,
+			List<Physician> physician, List<ClinicalDepartment> cinicalDepartment, List<Appointment> appointment,
 			MedicalRecord medicalRecord, List<Diagnosis> diagnosis, boolean discharged) {
 		super();
 		this.firstName = firstName;
@@ -80,7 +80,7 @@ public class Patient {
 		this.email = email;
 		this.address = address;
 		this.dateOfBirth = dateOfBirth;
-		this.doctor = doctor;
+		this.physician = physician;
 		this.cinicalDepartment = cinicalDepartment;
 		this.appointment = appointment;
 		this.medicalRecord = medicalRecord;
@@ -144,12 +144,12 @@ public class Patient {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public List<Doctor> getDoctor() {
-		return doctor;
+	public List<Physician> getPhysician() {
+		return physician;
 	}
 
-	public void setDoctor(List<Doctor> doctor) {
-		this.doctor = doctor;
+	public void setPhysician(List<Physician> physician) {
+		this.physician = physician;
 	}
 
 	public List<ClinicalDepartment> getCinicalDepartment() {

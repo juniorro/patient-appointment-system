@@ -11,7 +11,7 @@
 		<div id="blue">
 			<div class="container">
 				<div class="row">
-					<h3>New Patient.</h3>
+					<h3>New Physician.</h3>
 				</div>
 				<!-- /row -->
 			</div>
@@ -31,8 +31,8 @@
 					<p>Lorem Ipsum is simply dummy text of the printing and
 						typesetting industry. Lorem Ipsum has been the industry's standard
 						dummy text ever since the 1500s.</p>
-					<form th:action="@{/saveNewPatient}" method="post"
-						th:object="${patient}" role="form">
+					<form th:action="@{/saveNewPhysician}" method="post"
+						th:object="${physician}" role="form">
 						<div class="form-group">
 							<label for="InputName1">First Name *</label> <b><span
 								th:errors="*{firstName}" class="text-danger"></span></b> <input
@@ -54,9 +54,6 @@
 						<div class="form-group">
 							<label for="InputName1">Email *</label> <b><span
 								class="text-danger" th:errors="*{email}"></span></b>
-							<p th:if="${emailExist}" class="text-danger">
-								<b>Email already exists.</b>
-							</p>
 							<input type="email" th:field="*{email}" class="form-control"
 								id="exampleInputEmail1" />
 						</div>
@@ -64,12 +61,6 @@
 							<label for="InputName1">Address *</label> <b><span
 								class="text-danger" th:errors="*{address}"></span></b> <input
 								type="text" th:field="*{address}" class="form-control"
-								id="exampleInputEmail1" />
-						</div>
-						<div class="form-group">
-							<label for="InputEmail1">Date Of Birth *</label> <b><span
-								th:errors="*{dateOfBirth}" class="text-danger"></span></b> <input
-								type="text" th:field="*{dateOfBirth}" class="form-control"
 								id="exampleInputEmail1" />
 						</div>
 						<input type="submit" value="Save" class="btn btn-theme" />

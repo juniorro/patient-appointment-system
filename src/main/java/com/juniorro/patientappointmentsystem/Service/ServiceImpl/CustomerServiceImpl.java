@@ -3,6 +3,7 @@ package com.juniorro.patientappointmentsystem.Service.ServiceImpl;
 import java.util.List;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.juniorro.patientappointmentsystem.Service.CustomerService;
@@ -20,6 +21,9 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Autowired
 	private RoleService roleService;
+	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Override
 	public Customer findByUsername(String username) {
@@ -40,7 +44,9 @@ public class CustomerServiceImpl implements CustomerService {
 	public Customer saveCustomer(final Customer customer, Set<UserRole> userRoles) {
 		 for (UserRole roles : userRoles) {
              roleService.save(roles.getRole());
-         }		 
+         }
+		 String encryptpassword = bCryptPasswordEncoder.encode(customer.getPassword());
+		 customer.setPassword(encryptpassword);
 		 customer.getCustomerRoles().addAll(userRoles);
 		 customerRepo.save(customer);
 		return customer;

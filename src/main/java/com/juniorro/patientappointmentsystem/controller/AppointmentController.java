@@ -14,11 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.juniorro.patientappointmentsystem.Service.AppointmentService;
-import com.juniorro.patientappointmentsystem.Service.DoctorService;
 import com.juniorro.patientappointmentsystem.Service.PatientService;
+import com.juniorro.patientappointmentsystem.Service.PhysicianService;
 import com.juniorro.patientappointmentsystem.model.Appointment;
-import com.juniorro.patientappointmentsystem.model.Doctor;
 import com.juniorro.patientappointmentsystem.model.Patient;
+import com.juniorro.patientappointmentsystem.model.Physician;
 
 @Controller
 public class AppointmentController {
@@ -27,7 +27,7 @@ public class AppointmentController {
 	private AppointmentService appointmentService;
 	
 	@Autowired
-	private DoctorService doctorService;
+	private PhysicianService physicianService;
 	
 	@Autowired
 	private PatientService patientService;
@@ -42,19 +42,19 @@ public class AppointmentController {
 	public ModelAndView newAppointment(Model model) {
 		Appointment appointment = new Appointment();
 		model.addAttribute("appointment", appointment);
-		List<Doctor> doctors = doctorService.allDoctors();
+		List<Physician> physicians = physicianService.allPhysicians();
 		List<Patient> patients = patientService.allPatients();
 		model.addAttribute("patients", patients);
-		return new ModelAndView("newAppointment", "doctors", doctors);
+		return new ModelAndView("newAppointment", "physicians", physicians);
 	}
 	
 	@RequestMapping(value = "/saveNewAppointment", method = RequestMethod.POST)
 	public ModelAndView saveNewAppointment(@Valid Appointment newAppointment, BindingResult result, Model model, final RedirectAttributes redirect) {
 		if (result.hasErrors()) {
-			List<Doctor> doctors = doctorService.allDoctors();
+			List<Physician> physicians = physicianService.allPhysicians();
 			List<Patient> patients = patientService.allPatients();
 			model.addAttribute("patients", patients);
-			return new ModelAndView("newAppointment", "doctors", doctors);
+			return new ModelAndView("newAppointment", "physicians", physicians);
 		} else {
 			appointmentService.saveAppointment(newAppointment);
 			redirect.addFlashAttribute("newAppointmentSuccess", true);

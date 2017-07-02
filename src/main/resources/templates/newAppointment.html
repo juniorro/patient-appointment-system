@@ -32,16 +32,16 @@
 					<p>Lorem Ipsum is simply dummy text of the printing and
 						typesetting industry. Lorem Ipsum has been the industry's standard
 						dummy text ever since the 1500s.</p>
-					<div th:if="${updatedCustomer}" class="alert alert-success"
+					<!-- <div th:if="${updatedCustomer}" class="alert alert-success"
 						role="alert">
 						<strong>Information updated successfully.</strong>
-					</div>
+					</div> -->
 					<p th:if="${emailExist}" class="text-danger">
 						<b>Email already exists.</b>
 					</p>
 					<form th:action="@{/saveNewAppointment}" method="post"
 						th:object="${appointment}" role="form">
-						<div class="form-group">
+						<!-- <div class="form-group">
 
 							<div class='input-group date' id='datetimepicker1'>
 								<input type='text' class="form-control" /> <span
@@ -49,24 +49,20 @@
 									class="glyphicon glyphicon-calendar"></span>
 								</span>
 							</div>
-						</div>
-						<!-- <div class="form-group">
+						</div> -->
+						<div class="form-group">
 						<label for="InputName1">Appointment Date *</label> <b><span
 							th:errors="*{appointmentDate}" class="text-danger"></span></b>
-							 <div class="input-group date" id="datetimepicker">
-							 <input type="text" th:field="*{appointmentDate}" class="form-control"/> <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-					 </div> 
-					 </div> -->
+							 <input type="date" th:field="*{appointmentDate}" class="form-control"/>
+					 </div>
 
 						<div class="form-group">
-							<label for="InputEmail1">Doctor *</label> <b><span
-								th:errors="*{doctor}" class="text-danger"></span></b> <select
-								th:field="*{doctor}" class="form-control">
-								<option th:each="doctor : ${doctors}"
-									th:value="${doctor.getId()}"
-									th:text="${doctor.getFirstName() + ' ' + doctor.getLastName()}"></option>
+							<label for="InputEmail1">Physician *</label> <b><span
+								th:errors="*{physician}" class="text-danger"></span></b> <select
+								th:field="*{physician}" class="form-control">
+								<option th:each="physician : ${physicians}"
+									th:value="${physician.getId()}"
+									th:text="${physician.getFirstName() + ' ' + physician.getLastName()}"></option>
 							</select>
 						</div>
 
