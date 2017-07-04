@@ -42,6 +42,7 @@
 								<th>Patient</th>
 								<th>From Date</th>
 								<th>To Date</th>
+								<th>Status</th>
 								<th>Note</th>
 								<th>Action</th>
 							</tr>
@@ -55,6 +56,7 @@
 									<span th:text="${appointment.patient.getLastName()}"></span></td>
 								<td th:text="${appointment.fromDate}"></td>
 								<td th:text="${appointment.toDate}"></td>
+								<td th:text="${appointment.status}"></td>
 								<td th:text="${appointment.note}"></td>
 								<td class="td-actions"><a href="#"
 									class="btn btn-default btn-xs"><span
@@ -71,6 +73,5 @@
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>

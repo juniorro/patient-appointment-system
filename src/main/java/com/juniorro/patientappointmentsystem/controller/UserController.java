@@ -1,12 +1,16 @@
 package com.juniorro.patientappointmentsystem.controller;
 
+import java.security.Principal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.juniorro.patientappointmentsystem.Service.CustomerService;
 import com.juniorro.patientappointmentsystem.Service.RoleService;
 import com.juniorro.patientappointmentsystem.model.Customer;
@@ -24,10 +29,10 @@ import com.juniorro.patientappointmentsystem.registrationlistener.OnRegistration
 public class UserController {
 	@Autowired
 	private CustomerService customerService;
-	
+
 	@Autowired
 	private RoleService roleService;
-	
+
 	@Autowired
 	private ApplicationEventPublisher eventPublisher;
 
@@ -42,7 +47,7 @@ public class UserController {
 		Customer customer = customerService.getOne(id);
 		return new ModelAndView("editCustomer", "customer", customer);
 	}
-	
+
 	@RequestMapping(value = "/newUser", method = RequestMethod.GET)
 	public ModelAndView newUser() {
 		Customer customer = new Customer();
@@ -89,5 +94,12 @@ public class UserController {
 			return new ModelAndView("editCustomer", "updatedCustomer", true);
 		}
 	}
+	
+	@RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public String profile(Model model, Authentication authentication) {
+		Object customer = authentication.getPrincipal();	
+		model.addAttribute("profile", customer);
+        return "profileinfo";
+    }
 
 }

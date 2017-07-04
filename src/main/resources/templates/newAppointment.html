@@ -50,16 +50,25 @@
 								</span>
 							</div>
 						</div> -->
+
 						<div class="form-group">
-						<label for="InputName1">From Date *</label> <b><span
-							th:errors="*{fromDate}" class="text-danger"></span></b>
-							 <input type="text" th:field="*{fromDate}" class="form-control"/>
-					 </div>
-					 <div class="form-group">
-						<label for="InputName1">To Date *</label> <b><span
-							th:errors="*{toDate}" class="text-danger"></span></b>
-							 <input type="text" th:field="*{toDate}" class="form-control"/>
-					 </div>
+							<div class='input-group date' id='datetimepicker1'>
+								<input type='text' class="form-control" /> <span
+									class="input-group-addon"> <span
+									class="glyphicon glyphicon-calendar"></span>
+								</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="InputName1">From Date *</label> <b><span
+								th:errors="*{fromDate}" class="text-danger"></span></b> <input
+								type="text" th:field="*{fromDate}" class="form-control" />
+						</div>
+						<div class="form-group">
+							<label for="InputName1">To Date *</label> <b><span
+								th:errors="*{toDate}" class="text-danger"></span></b> <input
+								type="text" th:field="*{toDate}" class="form-control" />
+						</div>
 
 						<div class="form-group">
 							<label for="InputEmail1">Physician *</label> <b><span
@@ -78,6 +87,16 @@
 								<option th:each="patient : ${patients}"
 									th:value="${patient.getId()}"
 									th:text="${patient.getFirstName() + ' ' + patient.getLastName()}"></option>
+							</select>
+						</div>
+
+						<div class="form-group">
+							<label for="InputEmail1">Status *</label> <b><span
+								th:errors="*{status}" class="text-danger"></span></b> <select
+								th:field="*{status}" class="form-control">
+								<option th:value="scheduled">scheduled</option>
+								<option th:value="completed">completed</option>
+								<option th:value="cancelled">cancelled</option>
 							</select>
 						</div>
 
@@ -112,6 +131,14 @@
 		</div>
 		<!--/container -->
 	</div>
-
+	
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script>
 </body>
 </html>

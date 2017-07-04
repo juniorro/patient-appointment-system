@@ -107,7 +107,7 @@
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown">ACCOUNTS<b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li sec:authorize="isAuthenticated()" style="cursor: pointer;"><a
+							<li sec:authorize="isAuthenticated()" style="cursor: pointer;"><a th:href="@{/profile}"
 								style="text-transform: uppercase;" sec:authentication="name"></a></li>
 							<li><a th:href="@{/logout}">LOGOUT</a></li>
 							<!-- <li><a href="portfolio.html"></a></li> -->
@@ -162,6 +162,12 @@
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
+	<!-- Include Required Prerequisites -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+ 
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>

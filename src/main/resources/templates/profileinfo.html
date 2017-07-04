@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="menu">
+
+<body>
+<div layout:fragment="mainpage">
+<!-- *****************************************************************************************************************
+	 BLUE WRAP
+	 ***************************************************************************************************************** -->
+	<div id="blue">
+		<div class="container">
+			<div class="row">
+				<h3>Edit User.</h3>
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /blue -->
+
+	<!-- *****************************************************************************************************************
+	 CONTACT FORMS
+	 ***************************************************************************************************************** -->
+
+	<div class="container mtb">
+		<div class="row">
+			<div class="col-lg-6">
+				<h4>Edit Customer</h4>
+				<div class="hline"></div>
+				<p>Lorem Ipsum is simply dummy text of the printing and
+					typesetting industry. Lorem Ipsum has been the industry's standard
+					dummy text ever since the 1500s.</p>
+				<div th:if="${updatedCustomer}" class="alert alert-success"
+					role="alert">
+					<strong>Information updated successfully.</strong>
+				</div>
+				<p th:if="${emailExist}" class="text-danger">
+					<b>Email already exists.</b>
+				</p>
+				<form th:action="@{/updateCustomer}" method="post"
+					th:object="${customer}" role="form">
+					<div class="form-group">
+						<input type="hidden" th:field="*{id}" class="form-control"
+							id="exampleInputEmail1" /> <label for="InputName1">First
+							Name *</label> <b><span th:errors="*{firstName}" class="text-danger"></span></b>
+						<input type="text" th:field="*{firstName}" class="form-control"
+							id="exampleInputEmail1" />
+					</div>
+					<div class="form-group">
+						<label for="InputName1">Last Name *</label> <b><span
+							th:errors="*{lastName}" class="text-danger"></span></b> <input
+							type="text" th:field="*{lastName}" class="form-control"
+							id="exampleInputEmail1" />
+					</div>
+					<div class="form-group">
+						<label for="InputName1">Phone *</label> <b><span
+							th:errors="*{phone}" class="text-danger"></span></b> <input
+							type="text" th:field="*{phone}" class="form-control"
+							id="exampleInputEmail1" />
+					</div>
+					<div class="form-group">
+						<label for="InputName1">Email *</label> <b><span
+							class="text-danger" th:errors="*{email}"></span></b>
+						<p th:if="${emailExist}" class="text-danger">
+							<b>Email already exists.</b>
+						</p>
+						<input type="email" th:field="*{email}" class="form-control"
+							id="exampleInputEmail1" />
+					</div>
+					<div class="form-group">
+						<label for="InputName1">User Name *</label> <b><span
+							class="text-danger" th:errors="*{username}"></span></b>
+						<p th:if="${usernameExist}" class="text-danger">
+							<b>Username already exists.</b>
+						</p>
+						<input type="text" th:field="*{username}" class="form-control"
+							id="exampleInputEmail1" />
+					</div>
+					<!-- <div class="form-group">
+						<label for="InputEmail1">Enable *</label> <b><span
+							th:errors="*{enabled}" class="text-danger"></span></b> <input
+							type="text" th:field="*{enabled}" class="form-control"
+							id="exampleInputEmail1" />
+					</div> -->
+					<div class="form-group">
+						<label for="InputEmail1">Enable *</label> <b><span
+							th:errors="*{enabled}" class="text-danger"></span></b> <select
+							th:field="*{enabled}" class="form-control">
+							<option value="true">Yes</option>
+							<option value="false">No</option>
+						</select>
+					</div>
+					<input type="hidden" th:field="*{password}" class="form-control"
+						id="exampleInputEmail1" /> <input type="submit" value="Update"
+						class="btn btn-theme" />
+				</form>
+			</div>
+			<!--/col-lg-8 -->
+
+			<div class="col-lg-6">
+				<h4>Support</h4>
+				<div class="hline"></div>
+				<p>Lorem Ipsum is simply dummy text of the printing and
+					typesetting industry. Lorem Ipsum has been the industry's standard
+					dummy text ever since the 1500s.</p>
+				<!-- <p>
+		 				Some Ave, 987,<br/>
+		 				23890, New York,<br/>
+		 				United States.<br/>
+		 			</p> -->
+				<p>
+					Email: hello@solidtheme.com<br /> Tel: +34 8493-4893
+				</p>
+			</div>
+		</div>
+		<!--/row -->
+	</div>
+	<!--/container -->
+	</div>
+
+</body>
+</html>

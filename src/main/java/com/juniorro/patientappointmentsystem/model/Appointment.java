@@ -22,12 +22,12 @@ public class Appointment {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@DateTimeFormat(pattern="MM/dd/yyyy h:m a")
+	@DateTimeFormat(pattern = "MM/dd/yyyy h:m a")
 	@Temporal(TemporalType.TIMESTAMP)
 	@NotNull(message = "From Date is required")
 	private Date fromDate;
-	
-	@DateTimeFormat(pattern="MM/dd/yyyy h:m a")
+
+	@DateTimeFormat(pattern = "MM/dd/yyyy h:m a")
 	@Temporal(TemporalType.TIMESTAMP)
 	@NotNull(message = "To date is required")
 	private Date toDate;
@@ -38,23 +38,26 @@ public class Appointment {
 	@ManyToOne
 	@JoinColumn(name = "patient_id")
 	private Patient patient;
-	
+
 	@NotNull(message = "Physician is required")
 	@ManyToOne
 	@JoinColumn(name = "physician_id")
 	private Physician physician;
 
+	private String status;
+
 	public Appointment() {
 		super();
 	}
 
-	public Appointment(Date fromDate, Date toDate, String note, Patient patient, Physician physician) {
+	public Appointment(Date fromDate, Date toDate, String note, Patient patient, Physician physician, String status) {
 		super();
 		this.fromDate = fromDate;
 		this.toDate = toDate;
 		this.note = note;
 		this.patient = patient;
 		this.physician = physician;
+		this.status = status;
 	}
 
 	public Long getId() {
@@ -103,6 +106,14 @@ public class Appointment {
 
 	public void setPhysician(Physician physician) {
 		this.physician = physician;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }
