@@ -164,4 +164,13 @@ public class Customer implements UserDetails {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", email=" + email + ", phone=" + phone + ", customerRoles="
+				+ customerRoles + ", enabled=" + enabled + "]";
+	}
+	
+	
+
 }

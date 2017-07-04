@@ -1,6 +1,7 @@
 package com.juniorro.patientappointmentsystem.controller;
 
 import java.security.Principal;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -11,6 +12,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -96,9 +99,11 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String profile(Model model, Authentication authentication) {
-		Object customer = authentication.getPrincipal();	
-		model.addAttribute("profile", customer);
+    public String profile(Model model, Principal principal, Authentication auth) {
+		Customer customer = customerService.findByUsername(principal.getName());
+		Set<UserRole> roles = customer.getCustomerRoles();
+		model.addAttribute("roles", roles);
+		model.addAttribute("customer", customer);
         return "profileinfo";
     }
 

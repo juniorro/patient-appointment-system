@@ -16,6 +16,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,6 +45,9 @@ import com.juniorro.patientappointmentsystem.registrationlistener.OnRegistration
 @Controller
 public class HomeController {
 
+	@Autowired
+	private SessionRegistry sessionRegistry;
+	
 	@Autowired
 	private CustomerService customerService;
 	
@@ -84,6 +88,8 @@ public class HomeController {
 		long patientCounts = patientService.count();
 		long physicianCounts = physicianService.count();
 		long appointmentCounts = appointmentService.count();
+		long allUsers = sessionRegistry.getAllPrincipals().size();
+		model.addAttribute("allUsers", allUsers);
 		model.addAttribute("physicianCounts", physicianCounts);
 		model.addAttribute("patientCounts", patientCounts);
 		model.addAttribute("appointmentCounts", appointmentCounts);
