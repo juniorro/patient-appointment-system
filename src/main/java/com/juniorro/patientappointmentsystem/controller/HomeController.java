@@ -32,6 +32,7 @@ import com.juniorro.patientappointmentsystem.Service.CustomerDetailsService;
 import com.juniorro.patientappointmentsystem.Service.CustomerService;
 import com.juniorro.patientappointmentsystem.Service.PasswordResetTokenService;
 import com.juniorro.patientappointmentsystem.Service.PatientService;
+import com.juniorro.patientappointmentsystem.Service.PhysicianService;
 import com.juniorro.patientappointmentsystem.Service.RoleService;
 import com.juniorro.patientappointmentsystem.Service.VerificationTokenService;
 import com.juniorro.patientappointmentsystem.model.Customer;
@@ -48,6 +49,9 @@ public class HomeController {
 	
 	@Autowired
 	private RoleService roleService;
+	
+	@Autowired
+	private PhysicianService physicianService;
 
 	@Autowired
 	private CustomerDetailsService customerDetailsService;
@@ -78,7 +82,9 @@ public class HomeController {
 	@RequestMapping(value = "/welcome")
 	public String welcome(Model model) {
 		long patientCounts = patientService.count();
+		long physicianCounts = physicianService.count();
 		long appointmentCounts = appointmentService.count();
+		model.addAttribute("physicianCounts", physicianCounts);
 		model.addAttribute("patientCounts", patientCounts);
 		model.addAttribute("appointmentCounts", appointmentCounts);
 		return "home";

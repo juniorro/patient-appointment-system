@@ -40,7 +40,8 @@
 								<th>ID</th>
 								<th>Doctor</th>
 								<th>Patient</th>
-								<th>Date</th>
+								<th>From Date</th>
+								<th>To Date</th>
 								<th>Note</th>
 								<th>Action</th>
 							</tr>
@@ -52,7 +53,8 @@
 									<span th:text="${appointment.physician.getLastName()}"></span></td>
 								<td><span th:text="${appointment.patient.getFirstName()}"></span>
 									<span th:text="${appointment.patient.getLastName()}"></span></td>
-								<td th:text="${appointment.appointmentDate}"></td>
+								<td th:text="${appointment.fromDate}"></td>
+								<td th:text="${appointment.toDate}"></td>
 								<td th:text="${appointment.note}"></td>
 								<td class="td-actions"><a href="#"
 									class="btn btn-default btn-xs"><span

@@ -51,9 +51,14 @@
 							</div>
 						</div> -->
 						<div class="form-group">
-						<label for="InputName1">Appointment Date *</label> <b><span
-							th:errors="*{appointmentDate}" class="text-danger"></span></b>
-							 <input type="date" th:field="*{appointmentDate}" class="form-control"/>
+						<label for="InputName1">From Date *</label> <b><span
+							th:errors="*{fromDate}" class="text-danger"></span></b>
+							 <input type="text" th:field="*{fromDate}" class="form-control"/>
+					 </div>
+					 <div class="form-group">
+						<label for="InputName1">To Date *</label> <b><span
+							th:errors="*{toDate}" class="text-danger"></span></b>
+							 <input type="text" th:field="*{toDate}" class="form-control"/>
 					 </div>
 
 						<div class="form-group">
