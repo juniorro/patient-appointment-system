@@ -2,6 +2,9 @@ package com.juniorro.patientappointmentsystem.Service;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import com.juniorro.patientappointmentsystem.model.Customer;
+import com.juniorro.patientappointmentsystem.model.security.Authority;
 
 @Service
 public class CustomerDetailsService implements UserDetailsService {
@@ -26,11 +30,12 @@ public class CustomerDetailsService implements UserDetailsService {
 		if (customer == null){
 			throw new UsernameNotFoundException ("No user was found with username " + username);
 		}
-		return new User(customer.getUsername(), customer.getPassword(), customer.isEnabled(), true, true, true, getAuthoriries(customer.getAuthorities().toString()));
+		return new User(customer.getUsername(), customer.getPassword(), customer.isEnabled(), true, true, true, customer.getAuthorities());
 	}
+	
 
-	private Collection<? extends GrantedAuthority> getAuthoriries(String role) {
+	/*private Collection<? extends GrantedAuthority> getAuthoriries(String role) {
 		return Arrays.asList(new SimpleGrantedAuthority(role));
-	}
+	}*/
 
 }

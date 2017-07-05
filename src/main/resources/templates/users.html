@@ -52,7 +52,7 @@
 								<td th:text="${customer.phone}"></td>
 								<td th:text="${customer.username}"></td>
 								<td th:text="${customer.email}"></td>
-								<td ></td>
+								<td th:text="${customer.customerRoles.getRole().getName()"></td>
 								<td th:text="${customer.enabled}"></td>
 								<td class="td-actions">
 									<a href="#" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-search"></span>View</a>

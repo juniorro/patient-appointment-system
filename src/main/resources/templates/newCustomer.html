@@ -4,7 +4,6 @@
 	layout:decorator="menu">
 
 <body>
-	<div layout:fragment="mainpage">
 		<!-- *****************************************************************************************************************
 	 BLUE WRAP
 	 ***************************************************************************************************************** -->
@@ -22,8 +21,10 @@
 		<!-- *****************************************************************************************************************
 	 CONTACT FORMS
 	 ***************************************************************************************************************** -->
+	<div layout:fragment="mainpage">
+	
 
-		<div class="container mtb" >
+		<div class="container mtb" sec:authorize="hasRole('ROLE_ADMIN')">
 			<div class="row">
 				<div class="col-lg-6">
 					<h4>New User</h4>
@@ -99,10 +100,10 @@
 			<!--/row -->
 		</div>
 		<!--/container -->
-	</div>
 	
+
 	
-	<!-- <div layout:fragment="mainpage" sec:authorize="hasRole('ROLE_USER')">
+	<div sec:authorize="hasRole('ROLE_USER')">
 		<div id="headerwrap">
 			<div class="container">
 
@@ -120,8 +121,9 @@
 					</div>
 				</section>
 			</div>
-			/container
 		</div>
-	</div> -->
+	</div>
+	
+	</div>
 </body>
 </html>
