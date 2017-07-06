@@ -56,7 +56,10 @@
 									<span th:text="${appointment.patient.getLastName()}"></span></td>
 								<td th:text="${appointment.fromDate}"></td>
 								<td th:text="${appointment.toDate}"></td>
-								<td th:text="${appointment.status}"></td>
+								<!-- <td th:text="${appointment.status}"></td> -->
+								<td class="text-center">
+                                        <span class="label label-success" th:text="${appointment.status}"></span>
+                                    </td>
 								<td th:text="${appointment.note}"></td>
 								<td class="td-actions"><a href="#"
 									class="btn btn-default btn-xs"><span

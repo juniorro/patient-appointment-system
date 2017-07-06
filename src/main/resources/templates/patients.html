@@ -49,8 +49,8 @@
 									<td th:text="${patient.address}"></td>
 									<td th:text="${patient.dateOfBirth}"></td>
 									<td class="td-actions">
-									<a href="#" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-search"></span>View</a>
-									<a th:href="@{/edit(id=${patient.id})}" class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+									<a th:href="@{/patientInfo(id=${patient.id})}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-search"></span>View</a>
+									<a th:href="@{/patientInfo(id=${patient.id})}" class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a>
 									<a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span>Remove</a>
 								</td>					
 								</tr>

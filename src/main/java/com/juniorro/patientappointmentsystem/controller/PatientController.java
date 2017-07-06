@@ -56,5 +56,13 @@ public class PatientController {
 			return new ModelAndView("editPatient", "updatedPatient", true);
 		}
 	}
+	
+	
+	@RequestMapping(value = "/patientInfo", method = RequestMethod.GET)
+	public ModelAndView patientInfo(long id) {
+		Patient patient = patientService.getOne(id);
+		return new ModelAndView("patientinfo", "patient", patient);
+		
+	}
 
 }
