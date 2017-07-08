@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="menu">
+
+<body>
+	<div layout:fragment="mainpage">
+		<!-- *****************************************************************************************************************
+	 BLUE WRAP
+	 ***************************************************************************************************************** -->
+		<div id="blue">
+			<div class="container">
+				<div class="row">
+					<h3>User Profile.</h3>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /blue -->
+
+		<!-- *****************************************************************************************************************
+	 CONTACT FORMS
+	 ***************************************************************************************************************** -->
+
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 col-md-12 col-lg-12">
+				<div th:if="${updatedUser}" class="alert alert-success" role="alert">
+						<strong>User updated successfully.</strong>
+					</div>
+					<div class="panel panel-info">
+						<div class="panel-heading">
+							<button type="submit" value="" class="btn btn-theme">Print</button>
+							<!-- <h3 class="panel-title">Print</h3> -->
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-3 col-lg-3 " align="center">
+									<img alt="User Pic"
+										src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png"
+										class="img-circle img-responsive" />
+								</div>
+
+								<div class=" col-md-9 col-lg-9 ">
+									<table
+										class="table-bordred table-striped table table-user-information">
+										<tbody>
+											<tr>
+												<td>First Name:</td>
+												<td th:text="${customer.firstName}"></td>
+											</tr>
+											<tr>
+												<td>Last Name:</td>
+												<td th:text="${customer.lastName}"></td>
+											</tr>
+											<tr>
+												<td>Email Address:</td>
+												<td th:text="${customer.email}"></td>
+											</tr>
+											<tr>
+												<td>Username:</td>
+												<td th:text="${customer.username}"></td>
+											</tr>
+											<tr>
+												<td>Phone:</td>
+												<td th:text="${customer.phone}"></td>
+											</tr>
+											<tr>
+												<td>Gender:</td>
+												<td th:text="${customer.gender}"></td>
+											</tr>
+											<tr>
+												<td>Street Address:</td>
+												<td th:text="${customer.streetAddress}"></td>
+											</tr>
+											<tr>
+												<td>City:</td>
+												<td th:text="${customer.city}"></td>
+											</tr>
+											<tr>
+												<td>Zip Code:</td>
+												<td th:text="${customer.zipCode}"></td>
+											</tr>
+											
+
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="panel-footer">
+							<a data-original-title="Broadcast Message" data-toggle="tooltip"
+								type="button" class="btn btn-sm btn-primary"><i
+								class="glyphicon glyphicon-envelope"></i>Message</a> <span
+								class="pull-right"> <a th:href="@{/editUser(id=${customer.id})}"
+								data-original-title="Edit this user" data-toggle="tooltip"
+								type="button" class="btn btn-sm btn-info"><i
+									class="glyphicon glyphicon-edit"></i>Edit</a> <a
+								data-original-title="Remove this user" data-toggle="tooltip"
+								type="button" class="btn btn-sm btn-danger"><i
+									class="glyphicon glyphicon-remove"></i>Delete</a>
+							</span>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!--/container -->
+	</div>
+
+</body>
+</html>

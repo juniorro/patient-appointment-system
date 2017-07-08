@@ -64,15 +64,14 @@
 
 	<!-- *****************************************************************************************************************
 	 CONTACT FORMS
-	 ***************************************************************************************************************** -->
-
+	 ***************************************************************************************************************** -->	 
 	 <div class="container mtb">
 	 	<div class="row">
 	 		<div class="col-lg-6">
 	 			<h4>Please Register</h4>
 	 			<div class="hline"></div>
 		 			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-		 			<form th:action="@{/register}" method="post" th:object="${customer}" role="form">
+		 			<form th:action="@{/register}" method="post" th:object="${customer}" enctype="multipart/form-data" role="form">
 		 			<div class="form-group">
 					    <label for="InputName1">First Name *</label>
 					    <b><span th:errors="*{firstName}" class="text-danger"></span></b>
@@ -83,11 +82,21 @@
 					    <b><span th:errors="*{lastName}" class="text-danger"></span></b>
 					    <input type="text" th:field="*{lastName}" class="form-control" id="exampleInputEmail1"/>
 					  </div>
-					  <div class="form-group">
-					    <label for="InputName1">Phone *</label>
-					     <b><span th:errors="*{phone}" class="text-danger"></span></b>
-					    <input type="text" th:field="*{phone}" class="form-control" id="exampleInputEmail1"/>
-					  </div>
+					    <input type="hidden" th:field="*{phone}" class="form-control" id="exampleInputEmail1"/>
+		
+					    <input type="hidden" th:field="*{gender}" class="form-control" id="exampleInputEmail1"/>
+				
+					    <input type="hidden" th:field="*{streetAddress}" class="form-control" id="exampleInputEmail1"/>
+					
+					    <input type="hidden" th:field="*{zipCode}" class="form-control" id="exampleInputEmail1"/>
+					 
+					    <input type="hidden" th:field="*{city}" class="form-control" id="exampleInputEmail1"/>
+
+					  <!-- <div class="form-group">
+					    <label for="InputName1">Profile Photo *</label>
+					    <b><span th:errors="*{profilePhoto}" class="text-danger"></span></b>
+					    <input type="file" th:field="*{profilePhoto}" class="form-control" id="exampleInputEmail1"/>
+					  </div> -->
 					  <div class="form-group">
 					    <label for="InputName1">Email *</label>
 					     <b><span class="text-danger" th:errors="*{email}"></span></b>

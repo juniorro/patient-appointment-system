@@ -11,7 +11,7 @@ BLUE WRAP
 		<div id="blue">
 			<div class="container">
 				<div class="row">
-					<h3>New User.</h3>
+					<h3>Edit User.</h3>
 				</div>
 				<!-- /row -->
 			</div>
@@ -23,23 +23,12 @@ BLUE WRAP
 CONTACT FORMS
 ***************************************************************************************************************** -->
 
-		
-
-
-
-
-
-
-
-
-
-
-
 		<div class="container mtb" sec:authorize="hasRole('ROLE_ADMIN')">
 		
 		<div class="col-md-12" sec:authorize="hasRole('ROLE_ADMIN')">
-			<form th:action="@{/saveNewUser}" method="post"	th:object="${customer}" enctype="multipart/form-data" class="form-horizontal">
+			<form th:action="@{/updateUser}" method="post"	th:object="${customer}" enctype="multipart/form-data" class="form-horizontal">
 				<fieldset>
+				<input type="hidden" th:field="*{id}" placeholder="" class="form-control input-md" />
 					<div class="form-group">
 						<label class="col-md-4 control-label">First Name</label>
 						<div class="col-md-4">
@@ -136,18 +125,8 @@ CONTACT FORMS
 						</div>
 					</div>
 					
-					<div class="form-group">
-						<label class="col-md-4 control-label">Password</label>
-						<div class="col-md-4">
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="fa fa-lock"></i>
-								</div>
-								<input type="password" th:field="*{password}"
-									placeholder="Password" class="form-control input-md" />
-							</div> <b><span th:errors="*{password}" class="text-danger"></span></b>
-						</div>
-					</div>
+					<input type="hidden" th:field="*{password}" placeholder="Password" class="form-control input-md" />
+
 
 
 					<div class="form-group">

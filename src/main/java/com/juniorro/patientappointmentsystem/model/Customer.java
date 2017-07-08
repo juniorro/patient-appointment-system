@@ -10,7 +10,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -44,8 +47,18 @@ public class Customer implements UserDetails {
 	@NotEmpty(message = "Email is required")
 	private String email;
 
-	@NotEmpty(message = "Phone is required")
 	private String phone;
+
+	private String streetAddress;
+	
+	private String city;
+
+	private String zipCode;
+
+	private String gender;
+
+	/*@Lob
+	private byte[] profilePhoto;*/
 
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JsonIgnore
@@ -58,6 +71,7 @@ public class Customer implements UserDetails {
 	}
 
 	public Customer(String username, String password, String firstName, String lastName, String email, String phone,
+			String streetAddress, String zipCode, String gender,
 			Set<UserRole> customerRoles, boolean enabled) {
 		super();
 		this.username = username;
@@ -66,6 +80,9 @@ public class Customer implements UserDetails {
 		this.lastName = lastName;
 		this.email = email;
 		this.phone = phone;
+		this.streetAddress = streetAddress;
+		this.zipCode = zipCode;
+		this.gender = gender;
 		this.customerRoles = customerRoles;
 		this.enabled = enabled;
 	}
@@ -126,6 +143,38 @@ public class Customer implements UserDetails {
 		this.phone = phone;
 	}
 
+	public String getStreetAddress() {
+		return streetAddress;
+	}
+
+	public void setStreetAddress(String streetAddress) {
+		this.streetAddress = streetAddress;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getZipCode() {
+		return zipCode;
+	}
+
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
 	public Set<UserRole> getCustomerRoles() {
 		return customerRoles;
 	}
@@ -170,7 +219,5 @@ public class Customer implements UserDetails {
 				+ ", lastName=" + lastName + ", email=" + email + ", phone=" + phone + ", customerRoles="
 				+ customerRoles + ", enabled=" + enabled + "]";
 	}
-	
-	
 
 }

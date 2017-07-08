@@ -45,10 +45,16 @@ public class UserController {
 		return new ModelAndView("users", "customers", customers);
 	}
 
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView editCustomer(Long id) {
+	@RequestMapping(value = "/userProfile", method = RequestMethod.GET)
+	public ModelAndView userProfile(Long id) {
 		Customer customer = customerService.getOne(id);
-		return new ModelAndView("editCustomer", "customer", customer);
+		return new ModelAndView("userProfile", "customer", customer);
+	}
+	
+	@RequestMapping(value = "/editUser", method = RequestMethod.GET)
+	public ModelAndView editUser(Long id) {
+		Customer customer = customerService.getOne(id);
+		return new ModelAndView("editUser", "customer", customer);
 	}
 
 	@RequestMapping(value = "/newUser", method = RequestMethod.GET)
@@ -88,23 +94,23 @@ public class UserController {
 		}
 	}
 
-	@RequestMapping(value = "/updateCustomer", method = RequestMethod.POST)
+	@RequestMapping(value = "/updateUser", method = RequestMethod.POST)
 	public ModelAndView updateCustomer(@Valid Customer customer, BindingResult result) {
 		if (result.hasErrors()) {
-			return new ModelAndView("editCustomer");
+			return new ModelAndView("editUser");
 		} else {
 			customerService.saveConfirmCustomer(customer);
-			return new ModelAndView("editCustomer", "updatedCustomer", true);
+			return new ModelAndView("userProfile", "updatedUser", true);
 		}
 	}
 	
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String profile(Model model, Principal principal, Authentication auth) {
+    public String profile(Model model, Principal principal) {
 		Customer customer = customerService.findByUsername(principal.getName());
 		Set<UserRole> roles = customer.getCustomerRoles();
 		model.addAttribute("roles", roles);
 		model.addAttribute("customer", customer);
-        return "profileinfo";
+        return "userProfile";
     }
 
 }
