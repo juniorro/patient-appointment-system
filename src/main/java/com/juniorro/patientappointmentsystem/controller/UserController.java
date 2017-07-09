@@ -1,7 +1,9 @@
 package com.juniorro.patientappointmentsystem.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.security.Principal;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -11,14 +13,12 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -86,6 +86,19 @@ public class UserController {
 			userRoles.add(new UserRole(customer, roleService.findByName("ROLE_ADMIN")));
 			customer.setEnabled(false);
 			final Customer newcustomer = customerService.saveCustomer(customer, userRoles);
+			MultipartFile profilePhoto = newcustomer.getProfilePhoto();
+
+			try {
+				byte[] bytes = profilePhoto.getBytes();
+				String name = newcustomer.getId() + ".png";
+				BufferedOutputStream stream = new BufferedOutputStream(
+						new FileOutputStream(new File("src/main/resources/static/image/user/" + name)));
+				stream.write(bytes);
+				stream.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 			final String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort()
 					+ request.getContextPath();
 			eventPublisher.publishEvent(new OnRegistrationCompleteEvent(newcustomer, appUrl));
@@ -100,6 +113,18 @@ public class UserController {
 			return new ModelAndView("editUser");
 		} else {
 			customerService.saveConfirmCustomer(customer);
+			MultipartFile profilePhoto = customer.getProfilePhoto();
+
+			try {
+				byte[] bytes = profilePhoto.getBytes();
+				String name = customer.getId() + ".png";
+				BufferedOutputStream stream = new BufferedOutputStream(
+						new FileOutputStream(new File("src/main/resources/static/image/user/" + name)));
+				stream.write(bytes);
+				stream.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			return new ModelAndView("userProfile", "updatedUser", true);
 		}
 	}

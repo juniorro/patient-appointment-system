@@ -10,15 +10,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.juniorro.patientappointmentsystem.model.security.Authority;
@@ -50,15 +49,15 @@ public class Customer implements UserDetails {
 	private String phone;
 
 	private String streetAddress;
-	
+
 	private String city;
 
 	private String zipCode;
 
 	private String gender;
 
-	/*@Lob
-	private byte[] profilePhoto;*/
+	@Transient
+	private MultipartFile profilePhoto;
 
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JsonIgnore
@@ -71,7 +70,7 @@ public class Customer implements UserDetails {
 	}
 
 	public Customer(String username, String password, String firstName, String lastName, String email, String phone,
-			String streetAddress, String zipCode, String gender,
+			String streetAddress, String city, String zipCode, String gender, MultipartFile profilePhoto,
 			Set<UserRole> customerRoles, boolean enabled) {
 		super();
 		this.username = username;
@@ -81,8 +80,10 @@ public class Customer implements UserDetails {
 		this.email = email;
 		this.phone = phone;
 		this.streetAddress = streetAddress;
+		this.city = city;
 		this.zipCode = zipCode;
 		this.gender = gender;
+		this.profilePhoto = profilePhoto;
 		this.customerRoles = customerRoles;
 		this.enabled = enabled;
 	}
@@ -173,6 +174,14 @@ public class Customer implements UserDetails {
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	public MultipartFile getProfilePhoto() {
+		return profilePhoto;
+	}
+
+	public void setProfilePhoto(MultipartFile profilePhoto) {
+		this.profilePhoto = profilePhoto;
 	}
 
 	public Set<UserRole> getCustomerRoles() {
