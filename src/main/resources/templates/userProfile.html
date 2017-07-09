@@ -26,7 +26,8 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12 col-md-12 col-lg-12">
-				<div th:if="${updatedUser}" class="alert alert-success" role="alert">
+					<div th:if="${updatedUser}" class="alert alert-success"
+						role="alert">
 						<strong>User updated successfully.</strong>
 					</div>
 					<div class="panel panel-info">
@@ -63,6 +64,15 @@
 												<td th:text="${customer.username}"></td>
 											</tr>
 											<tr>
+												<td>Account Active:</td>
+												<td th:text="${customer.enabled}"></td>
+											</tr>
+											<tr>
+											<td>Roles:</td>
+											<td th:each="role : ${customer.customerRoles}">
+											<span th:text="${role.getRole().getName()}"></span></td>
+											</tr>
+											<tr>
 												<td>Phone:</td>
 												<td th:text="${customer.phone}"></td>
 											</tr>
@@ -82,7 +92,7 @@
 												<td>Zip Code:</td>
 												<td th:text="${customer.zipCode}"></td>
 											</tr>
-											
+
 
 										</tbody>
 									</table>
@@ -93,7 +103,8 @@
 							<a data-original-title="Broadcast Message" data-toggle="tooltip"
 								type="button" class="btn btn-sm btn-primary"><i
 								class="glyphicon glyphicon-envelope"></i>Message</a> <span
-								class="pull-right"> <a th:href="@{/editUser(id=${customer.id})}"
+								class="pull-right"> <a
+								th:href="@{/editUser(id=${customer.id})}"
 								data-original-title="Edit this user" data-toggle="tooltip"
 								type="button" class="btn btn-sm btn-info"><i
 									class="glyphicon glyphicon-edit"></i>Edit</a> <a
@@ -107,7 +118,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<!--/container -->
 	</div>
 

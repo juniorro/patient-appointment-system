@@ -23,19 +23,7 @@ BLUE WRAP
 CONTACT FORMS
 ***************************************************************************************************************** -->
 
-		
-
-
-
-
-
-
-
-
-
-
-
-		<div class="container mtb" sec:authorize="hasRole('ROLE_ADMIN')">
+<div class="container mtb">
 		
 		<div class="col-md-12" sec:authorize="hasRole('ROLE_ADMIN')">
 			<form th:action="@{/saveNewUser}" method="post"	th:object="${customer}" enctype="multipart/form-data" class="form-horizontal">
@@ -205,17 +193,16 @@ CONTACT FORMS
 			</form>
 		</div>
 		
-			
-		</div>
-		<!--/container -->
-
-
-
-		<div sec:authorize="hasRole('ROLE_USER')">
-			<div id="headerwrap">
+		
+		
+		
+		
+		
+		<div sec:authorize="hasRole('ROLE_USER')" >
+			<div>
 				<div class="container">
 
-					<section id="wrapper" class="error-page">
+					<section class="error-page">
 						<div class="error-box">
 							<div class="error-body text-center">
 								<h1 class="text-danger">404</h1>
@@ -231,6 +218,12 @@ CONTACT FORMS
 				</div>
 			</div>
 		</div>
+		
+		
+		
+			
+		</div>
+		<!--/container -->
 
 	</div>
 </body>

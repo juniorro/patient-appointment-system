@@ -23,7 +23,7 @@ BLUE WRAP
 CONTACT FORMS
 ***************************************************************************************************************** -->
 
-		<div class="container mtb" sec:authorize="hasRole('ROLE_ADMIN')">
+		<div class="container mtb">
 		
 		<div class="col-md-12" sec:authorize="hasRole('ROLE_ADMIN')">
 			<form th:action="@{/updateUser}" method="post"	th:object="${customer}" enctype="multipart/form-data" class="form-horizontal">
@@ -53,6 +53,16 @@ CONTACT FORMS
 								<input type="text" th:field="*{lastName}"
 									placeholder="Last Name" class="form-control input-md" />
 							</div> <b><span th:errors="*{lastName}" class="text-danger"></span></b>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label">Account Active</label>
+						<div class="col-md-4">
+							 <select
+								th:field="*{enabled}" class="form-control">
+								<option value="true">Yes</option>
+								<option value="false">No</option>
+							</select>
 						</div>
 					</div>
 					<!-- <div class="form-group">
@@ -183,18 +193,11 @@ CONTACT FORMS
 				</fieldset>
 			</form>
 		</div>
-		
-			
-		</div>
-		<!--/container -->
-
-
-
-		<div sec:authorize="hasRole('ROLE_USER')">
-			<div id="headerwrap">
+		<div sec:authorize="hasRole('ROLE_USER')" >
+			<div>
 				<div class="container">
 
-					<section id="wrapper" class="error-page">
+					<section class="error-page">
 						<div class="error-box">
 							<div class="error-body text-center">
 								<h1 class="text-danger">404</h1>
@@ -210,6 +213,13 @@ CONTACT FORMS
 				</div>
 			</div>
 		</div>
+			
+		</div>
+		<!--/container -->
+
+
+
+		
 
 	</div>
 </body>

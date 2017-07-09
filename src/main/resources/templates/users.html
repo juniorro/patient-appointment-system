@@ -4,7 +4,7 @@
 	layout:decorator="menu">
 <body>
 
-<div layout:fragment="mainpage">
+	<div layout:fragment="mainpage">
 		<!-- *****************************************************************************************************************
 	 BLUE WRAP
 	 ***************************************************************************************************************** -->
@@ -23,15 +23,16 @@
 		<!-- *****************************************************************************************************************
 	 USER TABLE
 	 ***************************************************************************************************************** -->
-	 
-	 
-	 <div class="container">
+
+
+		<div class="container">
 			<div class="row">
 				<div class="col-sm-12">
 					<div th:if="${newUser}" class="alert alert-success" role="alert">
 						<strong>New user added successfully.</strong>
 					</div>
-					<table id="example" class="table table-bordred table-striped table-bordered">
+					<table id="example"
+						class="table table-bordred table-striped table-bordered">
 						<thead>
 							<tr>
 								<th>ID</th>
@@ -53,13 +54,19 @@
 								<td th:text="${customer.phone}"></td>
 								<td th:text="${customer.username}"></td>
 								<td th:text="${customer.email}"></td>
-								<td></td>
+								<td th:each="role : ${customer.customerRoles}">
+								<span th:text="${role.getRole().getName()}"></span>
+								</td>								
 								<td th:text="${customer.enabled}"></td>
-								<td class="td-actions">
-									<a th:href="@{/userProfile(id=${customer.id})}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-search"></span>View</a>
-									<a th:href="@{/editUser(id=${customer.id})}" class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a>
-									<a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span>Remove</a>
-								</td>
+								<td class="td-actions"><a
+									th:href="@{/userProfile(id=${customer.id})}"
+									class="btn btn-default btn-xs"><span
+										class="glyphicon glyphicon-search"></span>View</a> <a
+									th:href="@{/editUser(id=${customer.id})}"
+									class='btn btn-info btn-xs' href="#"><span
+										class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#"
+									class="btn btn-danger btn-xs"><span
+										class="glyphicon glyphicon-remove"></span>Remove</a></td>
 							</tr>
 						</tbody>
 					</table>

@@ -32,9 +32,11 @@
 									<th>Physician ID</th>
 									<th>First Name</th>
 									<th>Last Name</th>
+									<th>Active</th>
 									<th>Phone</th>
 									<th>Email</th>
-									<th>Address</th>
+									<th>License Number</th>
+									<th>NPI Number</th>
 									<th>Action</th>
 								</tr>
 							</thead>
@@ -43,9 +45,11 @@
 									<td th:text="${physician.id}"></td>
 									<td th:text="${physician.firstName}"></td>
 									<td th:text="${physician.lastName}"></td>
-									<td th:text="${physician.phone}"></td>									
+									<td th:text="${physician.enabled}"></td>									
+									<td th:text="${physician.phone}"></td>
 									<td th:text="${physician.email}"></td>
-									<td th:text="${physician.address}"></td>
+									<td th:text="${physician.licenseNumber}"></td>
+									<td th:text="${physician.npiNumber}"></td>
 									<td class="td-actions">
 									<a href="#" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-search"></span>View</a>
 									<a th:href="@{/edit(id=${physician.id})}" class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a>

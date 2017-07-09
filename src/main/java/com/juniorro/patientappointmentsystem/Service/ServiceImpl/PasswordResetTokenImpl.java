@@ -3,6 +3,7 @@ package com.juniorro.patientappointmentsystem.Service.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,9 @@ public class PasswordResetTokenImpl implements PasswordResetTokenService {
 	
 	@Autowired
 	private Environment env;
+	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Autowired
 	private PasswordResetTokenRepo passwordResetTokenRepo;
@@ -38,7 +42,8 @@ public class PasswordResetTokenImpl implements PasswordResetTokenService {
 	
 	@Override
     public void changePassword(final Customer customer, final String password) {
-		customer.setPassword(password);
+		String encryptpassword = bCryptPasswordEncoder.encode(customer.getPassword());
+		 customer.setPassword(encryptpassword);		
 		customerRepo.save(customer);
     }
 
