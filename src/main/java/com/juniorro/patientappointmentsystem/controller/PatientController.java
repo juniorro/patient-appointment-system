@@ -83,6 +83,7 @@ public class PatientController {
 		Patient patient = patientService.getOne(id);
 		List<Appointment> appointments = patient.getAppointment();
 		model.addAttribute(appointments);
+		System.out.println(appointments.toString());
 		return new ModelAndView("patientinfo", "patient", patient);
 		
 	}

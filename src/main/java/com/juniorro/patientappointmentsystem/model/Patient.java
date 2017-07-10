@@ -64,7 +64,6 @@ public class Patient {
 	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Physician> physician;
 
-	/* @NotEmpty(message = "Clinical department is required") */
 	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<ClinicalDepartment> cinicalDepartment;
 

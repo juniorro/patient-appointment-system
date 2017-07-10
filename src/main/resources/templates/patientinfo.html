@@ -28,17 +28,7 @@
 			<header class="header jumbotron">
 				<div class="container">
 					<div class="teacher-name">
-						<div class="row" style="margin-top: 0px;">
-							<div class="col-md-9">
-								<h3 style="font-size: 30px"
-									th:text="${patient.firstName+' '+patient.lastName}"></h3>
-							</div>
-							<div class="col-md-3">
-								<div class="button" style="float: right;">
-									<a href="#" class="btn btn-theme">Edit Profile</a>
-								</div>
-							</div>
-						</div>
+						<div class="row" style="margin-top: 0px;"></div>
 					</div>
 
 					<div class="row" style="margin-top: 20px;">
@@ -51,19 +41,25 @@
 
 						<div class="col-md-6">
 							<!-- Rank and Qualifications -->
-							<h5>Associate Professor</h5>
-							<p>PhD (On study at BUET), M.Sc. in research on ICT(UPC,
-								Spain), M.Sc. in research on ICT(UCL, Belgium).</p>
-							<p>Address: Namapara, Trishal, Mymensingh</p>
+							<p>
+								Name: <span th:text="${patient.firstName +' '+patient.lastName}"></span>
+							</p>
+							<p>
+								Date Of Birth: <span th:text="${patient.dateOfBirth}"></span>
+							</p>
+							<p>
+								SNN: <span th:text="${patient.ssn}"></span>
+							</p>
+							<p>
+								Status: <span th:text="${patient.status}"></span>
+							</p>
 						</div>
 
 						<div class="col-md-3 text-center">
 							<!-- Phone and Social -->
-							<span class="number" style="font-size: 18px">Phone: <strong
-								th:text="${patient.phone}"></strong></span>
 							<div class="button" style="padding-top: 18px">
-								<a href="mailto:ahmkctg@yahoo.com"
-									class="btn btn-theme btn-block">Send Email</a>
+								<a href="mailto:ahmkctg@yahoo.com" class="btn btn-theme">Edit
+									Profile</a>
 							</div>
 						</div>
 					</div>
@@ -79,72 +75,107 @@
 			<div class="row jumbotron">
 				<div class="col-md-12">
 					<div class="card card-block">
-						<h2 class="card-title" style="color: #009688">
+						<h2 class="card-title">
 							<i class="fa fa-user fa-fw"></i>Profile
 						</h2>
 						<div style="height: 15px"></div>
-						<table class="table table-striped table-hover">
+						<div class="col-md-6">
+							<p>
+								First Name: <span
+									th:text="${patient.firstName +' '+patient.lastName}"></span>
+							</p>
+							<p>
+								Last Name: <span th:text="${patient.lastName}"></span>
+							</p>
+							<p>
+								Date Of Birth: <span th:text="${patient.dateOfBirth}"></span>
+							</p>
+							<p>
+								SNN: <span th:text="${patient.ssn}"></span>
+							</p>
+							<p>
+								Phone: <span th:text="${patient.phone}"></span>
+							</p>
+							<p>
+								Status: <span th:text="${patient.status}"></span>
+							</p>
+						</div>
+						<div class="col-md-6">
+							<p>
+								ID: <span th:text="${patient.id}"></span>
+							</p>
+							<p>
+								Gender: <span th:text="${patient.gender}"></span>
+							</p>
+							<p>
+								Email: <span th:text="${patient.email}"></span>
+							</p>
+							<p>
+								Street: <span th:text="${patient.streetAddress}"></span>
+							</p>
+							<p>
+								City: <span th:text="${patient.city}"></span>
+							</p>
+							<p>
+								Zip: <span th:text="${patient.zipCode}"></span>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End:Biography -->
+
+			<!-- Section:Teaching Summary -->
+			<div class="row jumbotron">
+				<div class="col-md-12">
+					<div class="card card-block">
+						<h2 class="card-title">
+							<i class="fa fa-calendar fa-fw"></i>Appointments
+						</h2>
+						<div style="height: 15px"></div>
+						<table class="table table-bordered">
+							<thead class="thead-default">
+								<tr>
+									<th class="text-center">From Date</th>
+									<th class="text-center">To Date</th>
+									<th class="text-center">Physician</th>
+									<th class="text-center">Status</th>
+									<th class="text-center">Note</th>
+									<th class="text-center">Action</th>
+								</tr>
+							</thead>
 							<tbody>
-								<tr>
-									<td>Patient ID</td>
-									<td th:text="${patient.id}"></td>
-								</tr>
-								<tr>
-									<td>First Name</td>
-									<td th:text="${patient.firstName}"></td>
-								</tr>
-								<tr>
-									<td>Last Name</td>
-									<td th:text="${patient.lastName}"></td>
-								</tr>
-								<tr>
-									<td>Date Of Birth</td>
-									<td th:text="${patient.dateOfBirth}"></td>
-								</tr>
-								<tr>
-									<td>Gender</td>
-									<td th:text="${patient.gender}"></td>
-								</tr>
-								<tr>
-									<td>SSN</td>
-									<td th:text="${patient.ssn}"></td>
-								</tr>
-								<tr>
-									<td>Status</td>
-									<td th:text="${patient.status}"></td>
-								</tr>
-								<tr>
-									<td>Phone</td>
-									<td th:text="${patient.phone}"></td>
-								</tr>
-								<tr>
-									<td>Email</td>
-									<td th:text="${patient.email}"></td>
-								</tr>
-								<tr>
-									<td>Street Address</td>
-									<td th:text="${patient.streetAddress}"></td>
-								</tr>
-								<tr>
-									<td>City</td>
-									<td th:text="${patient.city}"></td>
-								</tr>
-								<tr>
-									<td>Zip Code</td>
-									<td th:text="${patient.zipCode}"></td>
+								<tr class="text-center"
+									th:each="appointment : ${patient.appointment}">
+									<td th:text="${appointment.fromDate}"></td>
+									<td th:text="${appointment.toDate}"></td>
+									<td
+										th:text="${appointment.physician.getFirstName() +' '+ appointment.physician.getLastName()}"></td>
+									<td class="text-center"><span class="label label-success"
+										th:text="${appointment.status}"></span></td>
+									<td th:text="${appointment.note}"></td>
+									<td class="td-actions"><a
+										th:href="@{/userProfile(id=${patient.id})}"
+										class="btn btn-default btn-xs"><span
+											class="glyphicon glyphicon-search"></span>View</a> <a
+										th:href="@{/editUser(id=${patient.id})}"
+										class='btn btn-info btn-xs' href="#"><span
+											class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#"
+										class="btn btn-danger btn-xs"><span
+											class="glyphicon glyphicon-remove"></span>Remove</a></td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
-			<!-- End:Biography -->
+			<!-- End:Teaching Summary -->
 
 			<!--Section:Interests-->
 			<div class="row jumbotron">
 				<div class="col-md-12">
 					<div class="card card-block">
-						<h2 class="card-title" style="color: #009688">
+						<h2 class="card-title">
 							<i class="fa fa-rocket fa-fw"></i>Diagnosis
 						</h2>
 						<ul class="list-group"
@@ -161,34 +192,6 @@
 			</div>
 			<!-- End :Interests -->
 
-			<!-- Section:Teaching Summary -->
-			<div class="row jumbotron">
-				<div class="col-md-12">
-					<div class="card card-block">
-						<h2 class="card-title" style="color: #009688">
-							<i class="fa fa-calendar fa-fw"></i>Appointments
-						</h2>
-						<div style="height: 15px"></div>
-						<table class="table table-bordered">
-							<thead class="thead-default">
-								<tr>
-									<th>From Date</th>
-									<th>To Date</th>
-									<th>Note</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="appointment : ${appointments}">
-									<td th:text="${appointment.appointment.getId()}"></td>
-									<td th:text="${appointment.toDate}"></td>
-									<td th:text="${appointment.note}"></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-			<!-- End:Teaching Summary -->
 
 			<!-- Section:Class Observing -->
 			<div class="row">

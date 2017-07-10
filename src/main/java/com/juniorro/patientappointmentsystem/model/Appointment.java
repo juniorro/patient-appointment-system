@@ -116,4 +116,10 @@ public class Appointment {
 		this.status = status;
 	}
 
+	@Override
+	public String toString() {
+		return "Appointment [id=" + id + ", fromDate=" + fromDate + ", toDate=" + toDate + ", note=" + note
+				+ ", patient=" + patient + ", physician=" + physician + ", status=" + status + "]";
+	}
+
 }
