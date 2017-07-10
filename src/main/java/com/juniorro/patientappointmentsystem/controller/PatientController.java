@@ -1,16 +1,24 @@
 package com.juniorro.patientappointmentsystem.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
+
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.juniorro.patientappointmentsystem.Service.PatientService;
+import com.juniorro.patientappointmentsystem.model.Appointment;
 import com.juniorro.patientappointmentsystem.model.Patient;
 
 @Controller
@@ -42,6 +50,18 @@ public class PatientController {
 			return new ModelAndView("newPatient");
 		} else {
 			patientService.savePatient(patient);
+			MultipartFile patientPhoto = patient.getPatientPhoto();
+
+			try {
+				byte[] bytes = patientPhoto.getBytes();
+				String name = patient.getId() + ".png";
+				BufferedOutputStream stream = new BufferedOutputStream(
+				new FileOutputStream(new File("src/main/resources/static/image/patient/" + name)));
+				stream.write(bytes);
+				stream.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			redirect.addFlashAttribute("newPatientSuccess", true);
 			return new ModelAndView("redirect:/patients");
 		}
@@ -59,8 +79,10 @@ public class PatientController {
 	
 	
 	@RequestMapping(value = "/patientInfo", method = RequestMethod.GET)
-	public ModelAndView patientInfo(long id) {
+	public ModelAndView patientInfo(long id, Model model) {
 		Patient patient = patientService.getOne(id);
+		List<Appointment> appointments = patient.getAppointment();
+		model.addAttribute(appointments);
 		return new ModelAndView("patientinfo", "patient", patient);
 		
 	}

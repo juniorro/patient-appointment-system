@@ -34,7 +34,6 @@
 									<th>Last Name</th>
 									<th>Phone</th>
 									<th>Email</th>
-									<th>Address</th>
 									<th>Date Of Birth</th>
 									<th>Action</th>
 								</tr>
@@ -46,7 +45,6 @@
 									<td th:text="${patient.lastName}"></td>
 									<td th:text="${patient.phone}"></td>									
 									<td th:text="${patient.email}"></td>
-									<td th:text="${patient.address}"></td>
 									<td th:text="${patient.dateOfBirth}"></td>
 									<td class="td-actions">
 									<a th:href="@{/patientInfo(id=${patient.id})}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-search"></span>View</a>

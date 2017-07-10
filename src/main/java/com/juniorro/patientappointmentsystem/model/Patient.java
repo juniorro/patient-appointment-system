@@ -13,11 +13,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 public class Patient {
@@ -32,6 +34,10 @@ public class Patient {
 	@NotEmpty(message = "Last Name is required")
 	private String lastName;
 
+	private String gender;
+
+	private String ssn;
+
 	@NotEmpty(message = "Phone is required")
 	private String phone;
 
@@ -39,13 +45,21 @@ public class Patient {
 	@NotEmpty(message = "Email is required")
 	private String email;
 
-	@NotEmpty(message = "Address is required")
-	private String address;
+	private String streetAddress;
 
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private String city;
+
+	private String zipCode;
+
+	private String status;
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
 	@NotNull(message = "Date of birth is required")
 	private Date dateOfBirth;
+
+	@Transient
+	private MultipartFile patientPhoto;
 
 	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Physician> physician;
@@ -63,29 +77,33 @@ public class Patient {
 	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Diagnosis> diagnosis;
 
-	private boolean discharged;
-
 	public Patient() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Patient(String firstName, String lastName, String phone, String email, String address, Date dateOfBirth,
-			List<Physician> physician, List<ClinicalDepartment> cinicalDepartment, List<Appointment> appointment,
-			MedicalRecord medicalRecord, List<Diagnosis> diagnosis, boolean discharged) {
+	public Patient(Long id, String firstName, String lastName, String gender, String ssn, String phone, String email,
+			String streetAddress, String city, String zipCode, String status, Date dateOfBirth,
+			MultipartFile patientPhoto, List<Physician> physician, List<ClinicalDepartment> cinicalDepartment,
+			List<Appointment> appointment, MedicalRecord medicalRecord, List<Diagnosis> diagnosis) {
 		super();
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.gender = gender;
+		this.ssn = ssn;
 		this.phone = phone;
 		this.email = email;
-		this.address = address;
+		this.streetAddress = streetAddress;
+		this.city = city;
+		this.zipCode = zipCode;
+		this.status = status;
 		this.dateOfBirth = dateOfBirth;
+		this.patientPhoto = patientPhoto;
 		this.physician = physician;
 		this.cinicalDepartment = cinicalDepartment;
 		this.appointment = appointment;
 		this.medicalRecord = medicalRecord;
 		this.diagnosis = diagnosis;
-		this.discharged = discharged;
 	}
 
 	public Long getId() {
@@ -112,6 +130,22 @@ public class Patient {
 		this.lastName = lastName;
 	}
 
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getSsn() {
+		return ssn;
+	}
+
+	public void setSsn(String ssn) {
+		this.ssn = ssn;
+	}
+
 	public String getPhone() {
 		return phone;
 	}
@@ -128,12 +162,36 @@ public class Patient {
 		this.email = email;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getStreetAddress() {
+		return streetAddress;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setStreetAddress(String streetAddress) {
+		this.streetAddress = streetAddress;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getZipCode() {
+		return zipCode;
+	}
+
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public Date getDateOfBirth() {
@@ -142,6 +200,14 @@ public class Patient {
 
 	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
+	}
+
+	public MultipartFile getPatientPhoto() {
+		return patientPhoto;
+	}
+
+	public void setPatientPhoto(MultipartFile patientPhoto) {
+		this.patientPhoto = patientPhoto;
 	}
 
 	public List<Physician> getPhysician() {
@@ -182,14 +248,6 @@ public class Patient {
 
 	public void setDiagnosis(List<Diagnosis> diagnosis) {
 		this.diagnosis = diagnosis;
-	}
-
-	public boolean isDischarged() {
-		return discharged;
-	}
-
-	public void setDischarged(boolean discharged) {
-		this.discharged = discharged;
 	}
 
 }

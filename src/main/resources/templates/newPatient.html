@@ -53,15 +53,21 @@
 						</div>
 					</div>
 					<div class="form-group">
+						<label class="col-md-4 control-label">Profile Photo</label>
+						<div class="col-md-4">
+							<input type="file" class="input-file" name="patientPhoto" th:field="*{patientPhoto}"/>
+						</div>
+					</div>
+					<div class="form-group">
 						<label class="col-md-4 control-label">Date Of Birth</label>
 						<div class="col-md-4">
 							<div class="input-group">
 								<div class="input-group-addon">
 									<i class="fa fa-id-card"> </i>
 								</div>
-								<input type="text" th:field="*{licenseNumber}"
+								<input type="date" th:field="*{dateOfBirth}"
 									placeholder="License Number" class="form-control input-md" />
-							</div><b><span th:errors="*{licenseNumber}" class="text-danger"></span></b>
+							</div><b><span th:errors="*{dateOfBirth}" class="text-danger"></span></b>
 						</div>
 					</div>
 					<div class="form-group">
@@ -76,6 +82,18 @@
 						</div>
 					</div>
 					<div class="form-group">
+						<label class="col-md-4 control-label">SSN</label>
+						<div class="col-md-4">
+							<div class="input-group">
+								<div class="input-group-addon">
+									<i class="fa fa-user"> </i>
+								</div>
+								<input type="text" th:field="*{ssn}"
+									placeholder="SSN Number" class="form-control input-md" />
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
 						<label class="col-md-4 control-label">Status</label>
 						<div class="col-md-4">
 							 <select
@@ -86,79 +104,6 @@
 								<option value="hospitalized">Hospitalized</option>
 								<option value="deceased">Deceased</option>
 							</select>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-md-4 control-label">Gender</label>
-						<div class="col-md-4">
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="fa fa-user"> </i>
-								</div>
-								<input type="text" th:field="*{npiNumber}"
-									placeholder="NPI Number" class="form-control input-md" />
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-md-4 control-label">SSN</label>
-						<div class="col-md-4">
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="fa fa-user"> </i>
-								</div>
-								<input type="text" th:field="*{ssn}"
-									placeholder="NPI Number" class="form-control input-md" />
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-md-4 control-label">Diagnosis</label>
-						<div class="col-md-4">
-							 <select
-								th:field="*{Diagnosis}" class="form-control">
-								<option value="active">Active</option>
-								<option value="inactive">Inactive</option>
-								<option value="discharged">Discharged</option>
-								<option value="hospitalized">Hospitalized</option>
-								<option value="deceased">Deceased</option>
-							</select>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-md-4 control-label">Gender</label>
-						<div class="col-md-4">
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="fa fa-user"> </i>
-								</div>
-								<input type="text" th:field="*{npiNumber}"
-									placeholder="NPI Number" class="form-control input-md" />
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-md-4 control-label">Gender</label>
-						<div class="col-md-4">
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="fa fa-user"> </i>
-								</div>
-								<input type="text" th:field="*{npiNumber}"
-									placeholder="NPI Number" class="form-control input-md" />
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-md-4 control-label">Gender</label>
-						<div class="col-md-4">
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="fa fa-user"> </i>
-								</div>
-								<input type="text" th:field="*{npiNumber}"
-									placeholder="NPI Number" class="form-control input-md" />
-							</div>
 						</div>
 					</div>
 					<div class="form-group">
@@ -240,89 +185,8 @@
 			</div>
 		</div>
 </div>
-
-
-
-
-
-
-
-
-
-		<div class="container mtb">
-			<div class="row">
-				<div class="col-lg-6">
-					<h4>New User</h4>
-					<div class="hline"></div>
-					<p>Lorem Ipsum is simply dummy text of the printing and
-						typesetting industry. Lorem Ipsum has been the industry's standard
-						dummy text ever since the 1500s.</p>
-					<form th:action="@{/saveNewPatient}" method="post"
-						th:object="${patient}" role="form">
-						<div class="form-group">
-							<label for="InputName1">First Name *</label> <b><span
-								th:errors="*{firstName}" class="text-danger"></span></b> <input
-								type="text" th:field="*{firstName}" class="form-control"
-								id="exampleInputEmail1" />
-						</div>
-						<div class="form-group">
-							<label for="InputName1">Last Name *</label> <b><span
-								th:errors="*{lastName}" class="text-danger"></span></b> <input
-								type="text" th:field="*{lastName}" class="form-control"
-								id="exampleInputEmail1" />
-						</div>
-						<div class="form-group">
-							<label for="InputName1">Phone *</label> <b><span
-								th:errors="*{phone}" class="text-danger"></span></b> <input
-								type="text" th:field="*{phone}" class="form-control"
-								id="exampleInputEmail1" />
-						</div>
-						<div class="form-group">
-							<label for="InputName1">Email *</label> <b><span
-								class="text-danger" th:errors="*{email}"></span></b>
-							<p th:if="${emailExist}" class="text-danger">
-								<b>Email already exists.</b>
-							</p>
-							<input type="email" th:field="*{email}" class="form-control"
-								id="exampleInputEmail1" />
-						</div>
-						<div class="form-group">
-							<label for="InputName1">Address *</label> <b><span
-								class="text-danger" th:errors="*{address}"></span></b> <input
-								type="text" th:field="*{address}" class="form-control"
-								id="exampleInputEmail1" />
-						</div>
-						<div class="form-group">
-							<label for="InputEmail1">Date Of Birth *</label> <b><span
-								th:errors="*{dateOfBirth}" class="text-danger"></span></b> <input
-								type="date" th:field="*{dateOfBirth}" class="form-control"
-								id="exampleInputEmail1" />
-						</div>
-						<input type="submit" value="Save" class="btn btn-theme" />
-					</form>
-				</div>
-				<!--/col-lg-8 -->
-
-				<div class="col-lg-6">
-					<h4>Support</h4>
-					<div class="hline"></div>
-					<p>Lorem Ipsum is simply dummy text of the printing and
-						typesetting industry. Lorem Ipsum has been the industry's standard
-						dummy text ever since the 1500s.</p>
-					<p>
-		 				Some Ave, 987,<br/>
-		 				23890, New York,<br/>
-		 				United States.<br/>
-		 			</p>
-					<p>
-						Email: hello@solidtheme.com<br /> Tel: +34 8493-4893
-					</p>
-				</div>
-			</div>
-			<!--/row -->
-		</div>
-		<!--/container -->
-	</div>
+<!--/container -->
+</div>
 
 </body>
 </html>
