@@ -1,9 +1,12 @@
 package com.juniorro.patientappointmentsystem.model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -22,7 +25,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 @Entity
-public class Patient {
+public class Patient implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -61,6 +64,10 @@ public class Patient {
 	@Transient
 	private MultipartFile patientPhoto;
 
+	/*@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ElementCollection*/
+	private String diagnosis;
+
 	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Physician> physician;
 
@@ -73,19 +80,15 @@ public class Patient {
 	@OneToOne
 	private MedicalRecord medicalRecord;
 
-	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Diagnosis> diagnosis;
-
 	public Patient() {
 		super();
 	}
 
-	public Patient(Long id, String firstName, String lastName, String gender, String ssn, String phone, String email,
+	public Patient(String firstName, String lastName, String gender, String ssn, String phone, String email,
 			String streetAddress, String city, String zipCode, String status, Date dateOfBirth,
-			MultipartFile patientPhoto, List<Physician> physician, List<ClinicalDepartment> cinicalDepartment,
-			List<Appointment> appointment, MedicalRecord medicalRecord, List<Diagnosis> diagnosis) {
+			MultipartFile patientPhoto, String diagnosis, List<Physician> physician,
+			List<ClinicalDepartment> cinicalDepartment, List<Appointment> appointment, MedicalRecord medicalRecord) {
 		super();
-		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.gender = gender;
@@ -98,11 +101,11 @@ public class Patient {
 		this.status = status;
 		this.dateOfBirth = dateOfBirth;
 		this.patientPhoto = patientPhoto;
+		this.diagnosis = diagnosis;
 		this.physician = physician;
 		this.cinicalDepartment = cinicalDepartment;
 		this.appointment = appointment;
 		this.medicalRecord = medicalRecord;
-		this.diagnosis = diagnosis;
 	}
 
 	public Long getId() {
@@ -209,6 +212,14 @@ public class Patient {
 		this.patientPhoto = patientPhoto;
 	}
 
+	public String getDiagnosis() {
+		return diagnosis;
+	}
+
+	public void setDiagnosis(String diagnosis) {
+		this.diagnosis = diagnosis;
+	}
+
 	public List<Physician> getPhysician() {
 		return physician;
 	}
@@ -241,12 +252,5 @@ public class Patient {
 		this.medicalRecord = medicalRecord;
 	}
 
-	public List<Diagnosis> getDiagnosis() {
-		return diagnosis;
-	}
-
-	public void setDiagnosis(List<Diagnosis> diagnosis) {
-		this.diagnosis = diagnosis;
-	}
 
 }

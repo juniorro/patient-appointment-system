@@ -17,14 +17,18 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.juniorro.patientappointmentsystem.Service.DiagnosisService;
 import com.juniorro.patientappointmentsystem.Service.PatientService;
 import com.juniorro.patientappointmentsystem.model.Appointment;
+import com.juniorro.patientappointmentsystem.model.Diagnosis;
 import com.juniorro.patientappointmentsystem.model.Patient;
 
 @Controller
 public class PatientController {
 	@Autowired
 	private PatientService patientService;
+	@Autowired
+	private DiagnosisService diagnosisService;
 
 	@RequestMapping(value = "/patients", method = RequestMethod.GET)
 	public ModelAndView users() {
@@ -39,9 +43,12 @@ public class PatientController {
 	}
 
 	@RequestMapping(value = "/newPatient", method = RequestMethod.GET)
-	public ModelAndView newUser() {
+	public ModelAndView newUser(Model model) {
+		List<Diagnosis> diagnosis = diagnosisService.allDiagnosis();
+		System.out.println(diagnosis);
 		Patient patient = new Patient();
-		return new ModelAndView("newPatient", "patient", patient);
+		model.addAttribute(patient);
+		return new ModelAndView("newPatient", "diagnosis", diagnosis);
 	}
 
 	@RequestMapping(value = "/saveNewPatient", method = RequestMethod.POST)

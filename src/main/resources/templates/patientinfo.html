@@ -176,16 +176,10 @@
 				<div class="col-md-12">
 					<div class="card card-block">
 						<h2 class="card-title">
-							<i class="fa fa-rocket fa-fw"></i>Diagnosis
+							<i class="fa fa-stethoscope fa-fw"></i>Diagnosis
 						</h2>
-						<ul class="list-group"
-							style="margin-top: 15px; margin-bottom: 15px;">
-							<li class="list-group-item">Cloud and Parallel Computing</li>
-							<li class="list-group-item">Big Data Analysis and Management</li>
-							<li class="list-group-item">High-performance and Low-Power
-								Real-Time Systems</li>
-							<li class="list-group-item">Mobile Embedded Systems and
-								Network Security</li>
+						<ul class="list-group" style="margin-top: 15px; margin-bottom: 15px;">
+							<li th:text="${patient.diagnosis}" class="list-group-item"></li>
 						</ul>
 					</div>
 				</div>
