@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -26,6 +27,7 @@ import com.juniorro.patientappointmentsystem.Service.CustomerService;
 import com.juniorro.patientappointmentsystem.Service.RoleService;
 import com.juniorro.patientappointmentsystem.model.Customer;
 import com.juniorro.patientappointmentsystem.model.security.UserRole;
+import com.juniorro.patientappointmentsystem.model.security.VerificationToken;
 import com.juniorro.patientappointmentsystem.registrationlistener.OnRegistrationCompleteEvent;
 
 @Controller
@@ -46,13 +48,13 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/userProfile", method = RequestMethod.GET)
-	public ModelAndView userProfile(Long id) {
+	public ModelAndView userProfile(@RequestParam("id") Long id) {
 		Customer customer = customerService.getOne(id);
 		return new ModelAndView("userProfile", "customer", customer);
 	}
 	
 	@RequestMapping(value = "/editUser", method = RequestMethod.GET)
-	public ModelAndView editUser(Long id) {
+	public ModelAndView editUser(@RequestParam("id") Long id) {
 		Customer customer = customerService.getOne(id);
 		return new ModelAndView("editUser", "customer", customer);
 	}
@@ -125,7 +127,7 @@ public class UserController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			return new ModelAndView("userProfile", "updatedUser", true);
+			return new ModelAndView("redirect:/userProfile?id="+customer.getId(), "updatedUser", true);
 		}
 	}
 	
@@ -136,6 +138,13 @@ public class UserController {
 		model.addAttribute("roles", roles);
 		model.addAttribute("customer", customer);
         return "userProfile";
+    }
+	
+	@RequestMapping(value = "/deleteUser", method = RequestMethod.GET)
+    public String delete(@RequestParam("id") long id, Model model) {
+		customerService.delete(id);
+		model.addAttribute("userDelete", true);
+        return "redirect:/users";
     }
 
 }

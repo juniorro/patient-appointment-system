@@ -23,6 +23,7 @@
 		<!-- *****************************************************************************************************************
 	 USER TABLE
 	 ***************************************************************************************************************** -->
+	 
 
 
 		<div class="container">
@@ -31,23 +32,26 @@
 					<div th:if="${newUser}" class="alert alert-success" role="alert">
 						<strong>New user added successfully.</strong>
 					</div>
+					<div th:if="${userDelete}" class="alert alert-success" role="alert">
+						<strong>User deleted successfully.</strong>
+					</div>
 					<table id="example"
 						class="table table-bordred table-striped table-bordered">
 						<thead>
 							<tr>
-								<th>ID</th>
-								<th>First Name</th>
-								<th>Last Name</th>
-								<th>Phone</th>
-								<th>Username</th>
-								<th>Email</th>
-								<th>Role</th>
-								<th>Active</th>
-								<th>Action</th>
+								<th class="text-center">ID</th>
+								<th class="text-center">First Name</th>
+								<th class="text-center">Last Name</th>
+								<th class="text-center">Phone</th>
+								<th class="text-center">Username</th>
+								<th class="text-center">Email</th>
+								<th class="text-center">Role</th>
+								<th class="text-center">Active</th>
+								<th class="text-center">Action</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="customer : ${customers}">
+							<tr th:each="customer : ${customers}" class="text-center">
 								<td th:text="${customer.id}"></td>
 								<td th:text="${customer.firstName}"></td>
 								<td th:text="${customer.lastName}"></td>
@@ -61,12 +65,8 @@
 								<td class="td-actions"><a
 									th:href="@{/userProfile(id=${customer.id})}"
 									class="btn btn-default btn-xs"><span
-										class="glyphicon glyphicon-search"></span>View</a> <a
-									th:href="@{/editUser(id=${customer.id})}"
-									class='btn btn-info btn-xs' href="#"><span
-										class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#"
-									class="btn btn-danger btn-xs"><span
-										class="glyphicon glyphicon-remove"></span>Remove</a></td>
+										class="glyphicon glyphicon-search"></span>View</a>
+										</td> 
 							</tr>
 						</tbody>
 					</table>
@@ -74,5 +74,6 @@
 			</div>
 		</div>
 	</div>
+	
 </body>
 </html>

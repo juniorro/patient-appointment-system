@@ -196,6 +196,7 @@ public class HomeController {
 		final Customer customer = verificationToken.getCustomer();
 		customer.setEnabled(true);
 		customerService.saveConfirmCustomer(customer);
+		verificationTokenService.delete(verificationToken.getId());
 		redirect.addFlashAttribute("tokenVerified", true);
 		return "redirect:/login";
 	}
@@ -240,7 +241,7 @@ public class HomeController {
 		final Authentication auth = new UsernamePasswordAuthenticationToken(customer, null,
 				customerDetailsService.loadUserByUsername(customer.getUsername()).getAuthorities());
 		SecurityContextHolder.getContext().setAuthentication(auth);
-
+		passwordResetTokenService.delete(passToken.getId());
 		return new ModelAndView("redirect:/newpassword");
 	}
 

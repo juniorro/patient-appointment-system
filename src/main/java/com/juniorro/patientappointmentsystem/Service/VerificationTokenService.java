@@ -15,5 +15,7 @@ public interface VerificationTokenService {
 	void saveToken(VerificationToken myToken);
 
 	VerificationToken getVerificationToken(String token);
+
+	void delete(final long id);
 	
 }

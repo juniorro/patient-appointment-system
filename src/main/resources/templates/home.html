@@ -12,7 +12,7 @@
 		<div id="headerwrap">
 			<div class="container">			
 				<div class="row">
-				<div class="col-md-3 col-sm-12 col-xs-12">
+				<a th:href="@{/patients}"><div class="col-md-3 col-sm-12 col-xs-12">
 						<div
 							class="panel panel-primary text-center no-boder bg-color-green">
 							<div class="panel-body">
@@ -23,8 +23,8 @@
 
 							</div>
 						</div>
-					</div>
-					<div class="col-md-3 col-sm-12 col-xs-12">
+					</div></a>
+					<a th:href="@{/physicians}"><div class="col-md-3 col-sm-12 col-xs-12">
 						<div
 							class="panel panel-primary text-center no-boder bg-color-blue">
 							<div class="panel-body">
@@ -35,8 +35,8 @@
 
 							</div>
 						</div>
-					</div>
-					<div class="col-md-3 col-sm-12 col-xs-12">
+					</div></a>
+					<a th:href="@{/appointments}"><div class="col-md-3 col-sm-12 col-xs-12">
 						<div class="panel panel-primary text-center no-boder bg-color-red">
 							<div class="panel-body">
 								<i class="fa fa fa-calendar fa-5x"></i>
@@ -45,8 +45,8 @@
 							<div class="panel-footer back-footer-red">Total
 								Appointments</div>
 						</div>
-					</div>
-					<div class="col-md-3 col-sm-12 col-xs-12">
+					</div></a>
+					<a th:href="@{/users}"><div class="col-md-3 col-sm-12 col-xs-12">
 						<div
 							class="panel panel-primary text-center no-boder bg-color-brown">
 							<div class="panel-body">
@@ -55,7 +55,7 @@
 							</div>
 							<div class="panel-footer back-footer-brown">Logged In Users</div>
 						</div>
-					</div>
+					</div></a>
 				</div>
 			</div>
 		</div>

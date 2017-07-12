@@ -16,4 +16,6 @@ public interface PasswordResetTokenService {
 	SimpleMailMessage constructResetTokenEmail(final String contextPath, final String token, final Customer customer);
 
 	void changePassword(Customer customer, String password);
+
+	void delete(long id);
 }

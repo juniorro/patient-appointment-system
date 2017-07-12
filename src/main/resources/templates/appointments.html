@@ -37,18 +37,18 @@
 						class="table table-bordred table-striped table-bordered">
 						<thead>
 							<tr>
-								<th>ID</th>
-								<th>Doctor</th>
-								<th>Patient</th>
-								<th>From Date</th>
-								<th>To Date</th>
-								<th>Status</th>
-								<th>Note</th>
-								<th>Action</th>
+								<th class="text-center">ID</th>
+								<th class="text-center">Doctor</th>
+								<th class="text-center">Patient</th>
+								<th class="text-center">From Date</th>
+								<th class="text-center">To Date</th>
+								<th class="text-center">Status</th>
+								<th class="text-center">Note</th>
+								<th class="text-center">Action</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="appointment : ${appointments}">
+							<tr th:each="appointment : ${appointments}" class="text-center">
 								<td th:text="${appointment.id}"></td>
 								<td><span th:text="${appointment.physician.getFirstName()}"></span>
 									<span th:text="${appointment.physician.getLastName()}"></span></td>

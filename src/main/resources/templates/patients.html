@@ -29,17 +29,17 @@
 						<table id="dataTables-example" class="table table-bordred table-striped table-bordered">
 							<thead>
 								<tr>
-									<th>ID</th>
-									<th>First Name</th>
-									<th>Last Name</th>
-									<th>Phone</th>
-									<th>Email</th>
-									<th>Date Of Birth</th>
-									<th>Action</th>
+									<th class="text-center">ID</th>
+									<th class="text-center">First Name</th>
+									<th class="text-center">Last Name</th>
+									<th class="text-center">Phone</th>
+									<th class="text-center">Email</th>
+									<th class="text-center">Date Of Birth</th>
+									<th class="text-center">Action</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="patient : ${patients}">
+								<tr th:each="patient : ${patients}" class="text-center">
 									<td th:text="${patient.id}"></td>
 									<td th:text="${patient.firstName}"></td>
 									<td th:text="${patient.lastName}"></td>

@@ -23,10 +23,10 @@
 	 CONTACT FORMS
 	 ***************************************************************************************************************** -->
 
-		<div class="container">
+		<div class="container mtb">
 			<div class="row">
 				<div class="col-sm-12 col-md-12 col-lg-12">
-					<div th:if="${updatedUser}" class="alert alert-success"
+					<div th:if="${param.updatedUser}" class="alert alert-success"
 						role="alert">
 						<strong>User updated successfully.</strong>
 					</div>
@@ -40,7 +40,7 @@
 								<div class="col-md-3 col-lg-3 " align="center">
 									<img alt="User Pic"
 										th:src="@{/image/user/}+${customer.id}+'.png'"
-										class="img-rounded img-responsive"/>
+										class="img-rounded img-responsive" />
 								</div>
 
 								<div class=" col-md-9 col-lg-9 ">
@@ -107,24 +107,218 @@
 							<a data-original-title="Broadcast Message" data-toggle="tooltip"
 								type="button" class="btn btn-sm btn-primary"><i
 								class="glyphicon glyphicon-envelope"></i>Message</a> <span
-								class="pull-right"> <a
+								class="pull-right"><!--  <a
 								th:href="@{/editUser(id=${customer.id})}"
 								data-original-title="Edit this user" data-toggle="tooltip"
 								type="button" class="btn btn-sm btn-info"><i
-									class="glyphicon glyphicon-edit"></i>Edit</a> <a
-								data-original-title="Remove this user" data-toggle="tooltip"
-								type="button" class="btn btn-sm btn-danger"><i
-									class="glyphicon glyphicon-remove"></i>Delete</a>
+									class="glyphicon glyphicon-edit"></i>Edit</a>
+								 -->	
+								<button type="button" class="btn btn-sm btn-info"
+									data-toggle="modal" data-target=".myModal"><i
+									class="glyphicon glyphicon-edit"></i>Edit</button>
+
+								<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target=".myModalDelete"><i
+									class="glyphicon glyphicon-remove"></i>Delete</button>
 							</span>
 						</div>
 
 					</div>
 				</div>
 			</div>
-		</div>
 
-		<!--/container -->
-	</div>
 
+				<!-- Modal -->
+				<div class="modal fade myModal" id="" role="dialog">
+					<div class="modal-dialog modal-lg">
+
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Edit Profile</h4>
+							</div>
+							<div class="modal-body">
+								<div class="col-md-12" sec:authorize="hasRole('ROLE_ADMIN')">
+									<form th:action="@{/updateUser}" method="post"
+										th:object="${customer}" enctype="multipart/form-data"
+										class="form-horizontal">
+										<fieldset>
+											<input type="hidden" th:field="*{id}"/>
+											<div class="form-group">
+												<label class="col-md-4 control-label">First Name</label>
+												<div class="col-md-4">
+													<div class="input-group">
+														<div class="input-group-addon">
+															<i class="fa fa-user"> </i>
+														</div>
+														<input type="text" th:field="*{firstName}"
+															placeholder="First Name" class="form-control input-md" />
+													</div>
+													<b><span th:errors="*{firstName}" class="text-danger"></span></b>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-md-4 control-label">Last Name</label>
+												<div class="col-md-4">
+													<div class="input-group">
+														<div class="input-group-addon">
+															<i class="fa fa-user"> </i>
+														</div>
+														<input type="text" th:field="*{lastName}"
+															placeholder="Last Name" class="form-control input-md" />
+													</div>
+													<b><span th:errors="*{lastName}" class="text-danger"></span></b>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-md-4 control-label">Profile Photo</label>
+												<div class="col-md-4">
+													<input type="file" class="input-file" name="profilePhoto"
+														th:field="*{profilePhoto}" />
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-md-4 control-label">Account Active</label>
+												<div class="col-md-4">
+													<select th:field="*{enabled}" class="form-control">
+														<option value="true">Yes</option>
+														<option value="false">No</option>
+													</select>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-md-4 control-label">Email Address</label>
+												<div class="col-md-4">
+													<div class="input-group">
+														<div class="input-group-addon">
+															<i class="fa fa-envelope-o"></i>
+														</div>
+														<input type="text" th:field="*{email}"
+															placeholder="Email Address" class="form-control input-md" />
+													</div>
+													<b><span th:errors="*{email}" class="text-danger"></span></b>
+													<b><span th:if="${emailExist}" class="text-danger">
+															<b>Email already exists</b>
+													</span></b>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-md-4 control-label">Username</label>
+												<div class="col-md-4">
+													<div class="input-group">
+														<div class="input-group-addon">
+															<i class="fa fa-user"></i>
+														</div>
+														<input type="text" th:field="*{username}"
+															placeholder="username" class="form-control input-md" />
+													</div>
+													<b><span th:errors="*{username}" class="text-danger"></span></b>
+													<b><span th:if="${usernameExist}" class="text-danger">
+															<b>Username already exists</b>
+													</span></b>
+												</div>
+											</div>
+
+											<input type="hidden" th:field="*{password}"
+												placeholder="Password" class="form-control input-md" />
+											<div class="form-group">
+												<label class="col-md-4 control-label" for="Father">Phone</label>
+												<div class="col-md-4">
+													<div class="input-group">
+														<div class="input-group-addon">
+															<i class="fa fa-phone" style="font-size: 20px;"></i>
+														</div>
+														<b><span th:errors="*{phone}" class="text-danger"></span></b>
+														<input type="text" th:field="*{phone}" placeholder="Phone"
+															class="form-control input-md" />
+													</div>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-md-4 control-label">Gender</label>
+												<div class="col-md-4">
+													<select th:field="*{gender}" class="form-control">
+														<option value="male">male</option>
+														<option value="female">female</option>
+														<option value="other">other</option>
+													</select>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-md-4 control-label col-xs-12">Address</label>
+												<div class="col-md-2  col-xs-4">
+													<b><span th:errors="*{streetAddress}"
+														class="text-danger"></span></b> <input type="text"
+														th:field="*{streetAddress}" placeholder="Street address"
+														class="form-control input-md " />
+												</div>
+												<div class="col-md-2 col-xs-4">
+													<b><span th:errors="*{zipCode}" class="text-danger"></span></b>
+													<input type="text" th:field="*{zipCode}"
+														placeholder="Zip code" class="form-control input-md " />
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-md-4 control-label"></label>
+												<div class="col-md-2  col-xs-4">
+													<b><span th:errors="*{city}" class="text-danger"></span></b>
+													<input type="text" th:field="*{city}" placeholder="City"
+														class="form-control input-md " />
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-md-4 control-label"></label>
+												<div class="col-md-4">
+													<input type="submit" value="Save" class="btn btn-theme" />
+													<a class="btn btn-danger" data-dismiss="modal" value="">
+														<span></span>Candel
+													</a>
+
+												</div>
+											</div>
+										</fieldset>
+									</form>
+								</div>
+							</div>
+							<div class="modal-footer">
+							</div>
+						</div>
+
+					</div>
+				</div>
+				
+				
+				
+				
+				
+				
+				
+				<!-- Modal -->
+<div class="modal fade myModalDelete" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete User</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete user <span th:text="${customer.firstName+' '+customer.lastName}"></span>?  <br></br><br></br>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <a th:href="@{/deleteUser(id=${customer.id})}" type="submit" class="btn btn-danger">Delete</a>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div>
 </body>
 </html>

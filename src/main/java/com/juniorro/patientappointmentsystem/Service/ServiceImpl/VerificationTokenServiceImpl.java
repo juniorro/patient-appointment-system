@@ -38,6 +38,11 @@ public class VerificationTokenServiceImpl implements VerificationTokenService {
 		return verificationTokenRepo.findByToken(token);
 	}
 
+	@Override
+	public void delete(long id) {
+		verificationTokenRepo.delete(id);
+	}
+
 
 
 }

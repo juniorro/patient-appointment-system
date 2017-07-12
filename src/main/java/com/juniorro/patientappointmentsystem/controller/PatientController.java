@@ -80,7 +80,19 @@ public class PatientController {
 			return new ModelAndView("editPatient");
 		} else {
 			patientService.savePatient(patient);
-			return new ModelAndView("editPatient", "updatedPatient", true);
+			MultipartFile patientPhoto = patient.getPatientPhoto();
+
+			try {
+				byte[] bytes = patientPhoto.getBytes();
+				String name = patient.getId() + ".png";
+				BufferedOutputStream stream = new BufferedOutputStream(
+				new FileOutputStream(new File("src/main/resources/static/image/patient/" + name)));
+				stream.write(bytes);
+				stream.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return new ModelAndView("redirect:/patientInfo?id="+patient.getId(), "updatedPatient", true);
 		}
 	}
 	

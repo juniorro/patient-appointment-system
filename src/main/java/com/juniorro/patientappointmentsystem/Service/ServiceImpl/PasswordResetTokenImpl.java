@@ -58,4 +58,9 @@ public class PasswordResetTokenImpl implements PasswordResetTokenService {
 		return email;
 	}
 
+	@Override
+	public void delete(Long id) {
+		passwordResetTokenRepo.delete(id);
+	}
+
 }

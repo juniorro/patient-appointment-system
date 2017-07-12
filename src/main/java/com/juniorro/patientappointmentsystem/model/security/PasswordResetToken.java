@@ -126,7 +126,15 @@ public class PasswordResetToken {
         return true;
     }
 
-    @Override
+    public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	@Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append("Token [String=").append(token).append("]").append("[Expires").append(expiryDate).append("]");

@@ -27,6 +27,8 @@ public interface CustomerService {
 
 	void saveConfirmCustomer(Customer customer);
 
-	Customer getOne(Long id);	
+	Customer getOne(Long id);
+
+	void delete(long id);	
 
 }

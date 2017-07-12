@@ -91,4 +91,11 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerRepo.findOne(id);
 	}
 
+	@Override
+	public void delete(long id) {
+		customerRepo.delete(id);
+	}
+
+
+
 }
