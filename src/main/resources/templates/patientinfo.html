@@ -37,9 +37,9 @@
 					<div class="row" style="margin-top: 20px;">
 						<div class="col-md-3">
 							<!-- Image -->
-							<a href="#"> <img class="img-rounded img-responsive"
+							<img class="img-rounded img-responsive"
 								th:src="@{/image/patient/}+${patient.id}+'.png'"
-								alt="patient Photo" /></a>
+								alt="patient Photo" />
 						</div>
 
 						<div class="col-md-6">
@@ -60,8 +60,9 @@
 
 						<div class="col-md-3 text-center">
 							<!-- Phone and Social -->
-							<div class="button" style="padding-top: 18px">
-								<a th:href="@{/editPatient(id=${patient.id})}" class="btn btn-theme">Edit
+							<div  style="padding-top: 18px">
+								<a class="btn btn-theme"
+                  data-toggle="modal" data-target=".myModal">Edit
 									Profile</a>
 							</div>
 						</div>
@@ -162,7 +163,7 @@
 							<i class="fa fa-calendar fa-fw"></i>Appointments
 						</h2>
 						<div style="height: 15px"></div>
-						<table class="table table-bordered">
+						<table class="table table-bordered" id="myTable">
 							<thead class="thead-default">
 								<tr>
 									<th class="text-center">From Date</th>
@@ -225,6 +226,197 @@
     
     </div>
             
+            
+            <div class="modal fade myModal" id="" role="dialog">
+					<div class="modal-dialog modal-lg">
+
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Edit Profile</h4>
+							</div>
+							<div class="modal-body">
+								<div class="col-md-12" sec:authorize="hasRole('ROLE_ADMIN')">
+				<form th:action="@{/updatePatient}" method="post"
+					th:object="${patient}" enctype="multipart/form-data"
+					class="form-horizontal">
+					<fieldset>
+					<input type="hidden" th:field="*{id}" placeholder="SSN Number"/>
+						<div class="form-group">
+							<label class="col-md-4 control-label">First Name</label>
+							<div class="col-md-4">
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-user"> </i>
+									</div>
+									<input type="text" th:field="*{firstName}"
+										placeholder="First Name" class="form-control input-md" />
+								</div>
+								<b><span th:errors="*{firstName}" class="text-danger"></span></b>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">Last Name</label>
+							<div class="col-md-4">
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-user"> </i>
+									</div>
+									<input type="text" th:field="*{lastName}"
+										placeholder="Last Name" class="form-control input-md" />
+								</div>
+								<b><span th:errors="*{lastName}" class="text-danger"></span></b>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4 control-label">Profile Photo</label>
+							<div class="col-md-4">
+								<input type="file" class="input-file" name="patientPhoto"
+									th:field="*{patientPhoto}" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4 control-label">Date Of Birth</label>
+							<div class="col-md-4">
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-birthday-cake"> </i>
+									</div>
+									<input type="date" th:field="*{dateOfBirth}"
+										placeholder="License Number" class="form-control input-md" />
+								</div>
+								<b><span th:errors="*{dateOfBirth}" class="text-danger"></span></b>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4 control-label">Gender</label>
+							<div class="col-md-4">
+								<select th:field="*{gender}" class="form-control">
+									<option value="male">male</option>
+									<option value="female">female</option>
+									<option value="other">other</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4 control-label">SSN</label>
+							<div class="col-md-4">
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-user"> </i>
+									</div>
+									<input type="text" th:field="*{ssn}" placeholder="SSN Number"
+										class="form-control input-md" />
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4 control-label">Status</label>
+							<div class="col-md-4">
+								<select th:field="*{status}" class="form-control">
+									<option value="active">Active</option>
+									<option value="inactive">Inactive</option>
+									<option value="discharged">Discharged</option>
+									<option value="hospitalized">Hospitalized</option>
+									<option value="deceased">Deceased</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4 control-label">Email Address</label>
+							<div class="col-md-4">
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-envelope-o"></i>
+									</div>
+									<input type="text" th:field="*{email}"
+										placeholder="Email Address" class="form-control input-md" />
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="Father">Phone</label>
+							<div class="col-md-4">
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-phone" style="font-size: 20px;"></i>
+									</div>
+									<input type="text" th:field="*{phone}" placeholder="Phone"
+										class="form-control input-md" />
+								</div>
+								<b><span th:errors="*{phone}" class="text-danger"></span></b>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label col-xs-12">Address</label>
+							<div class="col-md-2  col-xs-4">
+								<input type="text" th:field="*{streetAddress}"
+									placeholder="Street address" class="form-control input-md " />
+							</div>
+							<div class="col-md-2 col-xs-4">
+								<input type="text" th:field="*{zipCode}" placeholder="Zip code"
+									class="form-control input-md " />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4 control-label"></label>
+							<div class="col-md-2  col-xs-4">
+								<input type="text" th:field="*{city}" placeholder="City"
+									class="form-control input-md " />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4 control-label">Diagnosis</label>
+							<div class="col-md-4">
+								<select id="framework" th:field="*{diagnosis}" multiple="multiple"
+									class="form-control">
+									<option value="Hypertension">Hypertension</option>
+									<option value="Diabetes">Diabetes</option>
+									<option value="Hyperlipidemia">Hyperlipidemia</option>
+									<option value="Anxiety">Anxiety</option>
+									<option value="Colon Cancer">Colon Cancer</option>
+									<option value="Lung Cancer">Lung Cancer</option>
+									<option value="Anxiety">Anxiety</option>
+									<option value="Obesity">Obesity</option>
+									<option value="Rhinitis">Rhinitis</option>
+									<option value="Esophagitis">Esophagitis</option>
+									<option value="Respiratory problems">Respiratory problems</option>
+									<option value="Hypothyroidism">Hypothyroidism</option>
+									<option value="Osteoarthritis">ROsteoarthritis</option>
+									<option value="Fibromyalgia / myositis">Fibromyalgia / myositis</option>
+									<option value="Respiratory problems">Respiratory problems</option>
+									<option value="Malaise / fatigue">Malaise / fatigue</option>
+									<option value="Asthma">Asthma</option>
+									<option value="Nail fungus">Nail fungus</option>
+									<option value="Coronary atherosclerosis">Coronary atherosclerosis</option>
+								</select>
+							</div><b><span th:errors="*{diagnosis}" class="text-danger"></span></b>							
+						</div>
+
+						<div class="form-group">
+												<label class="col-md-4 control-label"></label>
+												<div class="col-md-4">
+													<input type="submit" value="Save" class="btn btn-theme" />
+													<a class="btn btn-danger" data-dismiss="modal" value="">
+														<span></span>Candel
+													</a>
+
+												</div>
+											</div>
+					</fieldset>
+				</form>
+			</div>
+							</div>
+							<div class="modal-footer">
+							</div>
+						</div>
+
+					</div>
+				</div>
     
 			
 			
@@ -232,7 +424,6 @@
 			
 
 
-			<!-- Main container -->
 
 
 			

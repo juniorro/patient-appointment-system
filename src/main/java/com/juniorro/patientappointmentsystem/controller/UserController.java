@@ -144,7 +144,7 @@ public class UserController {
     public String delete(@RequestParam("id") long id, Model model) {
 		customerService.delete(id);
 		model.addAttribute("userDelete", true);
-        return "redirect:/users";
+        return "users";
     }
 
 }
