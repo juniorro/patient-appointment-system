@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.Email;
@@ -22,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.juniorro.patientappointmentsystem.model.security.Authority;
 import com.juniorro.patientappointmentsystem.model.security.UserRole;
+import com.juniorro.patientappointmentsystem.model.security.VerificationToken;
 
 @Entity
 public class Customer implements UserDetails {
@@ -63,6 +65,9 @@ public class Customer implements UserDetails {
 	@JsonIgnore
 	private Set<UserRole> customerRoles = new HashSet<>();
 
+	@OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private VerificationToken verificationToken;
+
 	private boolean enabled;
 
 	public Customer() {
@@ -71,7 +76,7 @@ public class Customer implements UserDetails {
 
 	public Customer(String username, String password, String firstName, String lastName, String email, String phone,
 			String streetAddress, String city, String zipCode, String gender, MultipartFile profilePhoto,
-			Set<UserRole> customerRoles, boolean enabled) {
+			Set<UserRole> customerRoles, VerificationToken verificationToken, boolean enabled) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -85,6 +90,7 @@ public class Customer implements UserDetails {
 		this.gender = gender;
 		this.profilePhoto = profilePhoto;
 		this.customerRoles = customerRoles;
+		this.verificationToken = verificationToken;
 		this.enabled = enabled;
 	}
 
@@ -190,6 +196,14 @@ public class Customer implements UserDetails {
 
 	public void setCustomerRoles(Set<UserRole> customerRoles) {
 		this.customerRoles = customerRoles;
+	}
+
+	public VerificationToken getVerificationToken() {
+		return verificationToken;
+	}
+
+	public void setVerificationToken(VerificationToken verificationToken) {
+		this.verificationToken = verificationToken;
 	}
 
 	public boolean isEnabled() {

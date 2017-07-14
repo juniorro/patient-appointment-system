@@ -24,14 +24,17 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.juniorro.patientappointmentsystem.Service.CustomerService;
+import com.juniorro.patientappointmentsystem.Service.PasswordResetTokenService;
 import com.juniorro.patientappointmentsystem.Service.RoleService;
 import com.juniorro.patientappointmentsystem.model.Customer;
 import com.juniorro.patientappointmentsystem.model.security.UserRole;
-import com.juniorro.patientappointmentsystem.model.security.VerificationToken;
 import com.juniorro.patientappointmentsystem.registrationlistener.OnRegistrationCompleteEvent;
 
 @Controller
 public class UserController {
+	@Autowired
+	private PasswordResetTokenService passwordResetTokenService;
+	
 	@Autowired
 	private CustomerService customerService;
 
@@ -144,7 +147,7 @@ public class UserController {
     public String delete(@RequestParam("id") long id, Model model) {
 		customerService.delete(id);
 		model.addAttribute("userDelete", true);
-        return "users";
+        return "redirect:/users";
     }
 
 }

@@ -12,7 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import com.juniorro.patientappointmentsystem.model.Customer;
 
@@ -22,7 +23,7 @@ public class VerificationToken {
 	private static final int EXPIRATION = 60 * 24;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	public Long getId() {
@@ -35,7 +36,7 @@ public class VerificationToken {
 
 	private String token;
 
-	@OneToOne(targetEntity = Customer.class, fetch = FetchType.EAGER)
+	@OneToOne(targetEntity = Customer.class, fetch = FetchType.EAGER )
 	@JoinColumn(nullable = false, name = "customer_id")
 	private Customer customer;
 

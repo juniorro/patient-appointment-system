@@ -59,7 +59,7 @@ public class PasswordResetTokenImpl implements PasswordResetTokenService {
 	}
 
 	@Override
-	public void delete(Long id) {
+	public void delete(long id) {
 		passwordResetTokenRepo.delete(id);
 	}
 
