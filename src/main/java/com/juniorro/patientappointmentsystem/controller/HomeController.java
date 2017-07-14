@@ -77,6 +77,17 @@ public class HomeController {
 
 	@Autowired
 	private AppointmentService appointmentService;
+	
+	/*@ExceptionHandler(NoHandlerFoundException.class)
+	public String handle(Exception ex) {
+	    return "redirect:/404";
+	}
+
+	@RequestMapping(value = "/404", method = RequestMethod.GET)
+	public String NotFoudPage() {
+	    return "404";
+
+	}*/
 
 	@RequestMapping(value = "/home")
 	public String index() {
@@ -87,11 +98,13 @@ public class HomeController {
 	public String welcome(Model model) {
 		long patientCounts = patientService.count();
 		long physicianCounts = physicianService.count();
+		long userCounts = customerService.count();
 		long appointmentCounts = appointmentService.count();
-		long allUsers = sessionRegistry.getAllPrincipals().size();
-		model.addAttribute("allUsers", allUsers);
+		long loggedInUsers = sessionRegistry.getAllPrincipals().size();
+		model.addAttribute("loggedInUsers", loggedInUsers);
 		model.addAttribute("physicianCounts", physicianCounts);
 		model.addAttribute("patientCounts", patientCounts);
+		model.addAttribute("userCounts", userCounts);
 		model.addAttribute("appointmentCounts", appointmentCounts);
 		return "home";
 	}

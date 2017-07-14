@@ -30,5 +30,7 @@ public interface CustomerService {
 	Customer getOne(Long id);
 
 	void delete(long id);	
+	
+	long count();
 
 }

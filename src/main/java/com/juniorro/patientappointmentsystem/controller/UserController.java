@@ -144,9 +144,9 @@ public class UserController {
     }
 	
 	@RequestMapping(value = "/deleteUser", method = RequestMethod.GET)
-    public String delete(@RequestParam("id") long id, Model model) {
+    public String delete(@RequestParam("id") long id, final RedirectAttributes redirect) {
 		customerService.delete(id);
-		model.addAttribute("userDelete", true);
+		redirect.addFlashAttribute("userDelete", true);
         return "redirect:/users";
     }
 

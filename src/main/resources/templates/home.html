@@ -10,55 +10,57 @@
 	 HEADERWRAP
 	 ***************************************************************************************************************** -->
 		<div id="headerwrap">
-			<div class="container">			
+			<div class="container">
 				<div class="row">
-				<a th:href="@{/patients}"><div class="col-md-3 col-sm-12 col-xs-12">
-						<div
-							class="panel panel-primary text-center no-boder bg-color-green">
-							<div class="panel-body">
-								<i class="fa fa-users fa-5x"></i>
-								<h3 th:text="${patientCounts}" class="patientcolor"></h3>
-							</div>
-							<div class="panel-footer back-footer-green">Total Patients
+					<a th:href="@{/patients}"><div
+							class="col-md-3 col-sm-12 col-xs-12">
+							<div
+								class="panel panel-primary text-center no-boder bg-color-green">
+								<div class="panel-body">
+									<i class="fa fa-users fa-5x"></i>
+									<h3 th:text="${patientCounts}" class="patientcolor"></h3>
+								</div>
+								<div class="panel-footer back-footer-green">Total Patients
 
+								</div>
 							</div>
-						</div>
-					</div></a>
-					<a th:href="@{/physicians}"><div class="col-md-3 col-sm-12 col-xs-12">
-						<div
-							class="panel panel-primary text-center no-boder bg-color-blue">
-							<div class="panel-body">
-								<i class="fa fa-user-md fa-5x"></i>
-								<h3 th:text="${physicianCounts}"></h3>
+						</div></a> <a th:href="@{/physicians}"><div
+							class="col-md-3 col-sm-12 col-xs-12">
+							<div
+								class="panel panel-primary text-center no-boder bg-color-blue">
+								<div class="panel-body">
+									<i class="fa fa-user-md fa-5x"></i>
+									<h3 th:text="${physicianCounts}"></h3>
+								</div>
+								<div class="panel-footer back-footer-blue">Total
+									Physicians</div>
 							</div>
-							<div class="panel-footer back-footer-blue">Total Physicians
-
+						</div></a> <a th:href="@{/appointments}"><div
+							class="col-md-3 col-sm-12 col-xs-12">
+							<div
+								class="panel panel-primary text-center no-boder bg-color-red">
+								<div class="panel-body">
+									<i class="fa fa fa-calendar fa-5x"></i>
+									<h3 th:text="${appointmentCounts}"></h3>
+								</div>
+								<div class="panel-footer back-footer-red">Total
+									Appointments</div>
 							</div>
-						</div>
-					</div></a>
-					<a th:href="@{/appointments}"><div class="col-md-3 col-sm-12 col-xs-12">
-						<div class="panel panel-primary text-center no-boder bg-color-red">
-							<div class="panel-body">
-								<i class="fa fa fa-calendar fa-5x"></i>
-								<h3 th:text="${appointmentCounts}"></h3>
+						</div></a> 
+						<a th:href="@{/users}"><div
+							class="col-md-3 col-sm-12 col-xs-12">
+							<div
+								class="panel panel-primary text-center no-boder bg-color-brown">
+								<div class="panel-body">
+									<i class="fa fa-user fa-5x"></i>
+									<h3 th:text="${userCounts}"></h3>
+								</div>
+								<div class="panel-footer back-footer-brown">Total Users</div>
 							</div>
-							<div class="panel-footer back-footer-red">Total
-								Appointments</div>
-						</div>
-					</div></a>
-					<a th:href="@{/users}"><div class="col-md-3 col-sm-12 col-xs-12">
-						<div
-							class="panel panel-primary text-center no-boder bg-color-brown">
-							<div class="panel-body">
-								<i class="fa fa-user fa-5x"></i>
-								<h3 th:text="${allUsers}"></h3>
-							</div>
-							<div class="panel-footer back-footer-brown">Logged In Users</div>
-						</div>
-					</div></a>
+						</div></a>
 				</div>
-			</div>
+			</div><h3>Total Currently Logged In Users: <span th:text="${loggedInUsers}"></span></h3>
 		</div>
 	</div>
-	</body>
+</body>
 </html>

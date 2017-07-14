@@ -96,6 +96,11 @@ public class CustomerServiceImpl implements CustomerService {
 		customerRepo.delete(id);
 	}
 
+	@Override
+	public long count() {
+		return customerRepo.count();
+	}
+
 
 
 }
