@@ -21,4 +21,6 @@ public interface PhysicianService {
 
 	Physician savePhysician(final Physician physician);
 
+	void delete(long id);
+
 }

@@ -13,4 +13,6 @@ public interface AppointmentService {
 
 	long count();
 
+	Appointment getOne(Long id);
+
 }

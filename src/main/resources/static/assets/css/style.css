@@ -67,6 +67,19 @@ a:focus {
   color:#01b2fe;
 }
 
+.bootstrap-datetimepicker-widget table td,
+ 
+.bootstrap-datetimepicker-widget table {
+  
+ 
+background-color:  #565b5b;
+ 
+color:#1cbedb;
+ 
+}
+
+
+
 ::-moz-selection  {
 	color: #fff;
 	text-shadow:none;

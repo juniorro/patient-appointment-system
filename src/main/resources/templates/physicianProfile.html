@@ -11,7 +11,7 @@
 		<div id="blue">
 			<div class="container">
 				<div class="row">
-					<h3>User Profile.</h3>
+					<h3>Physician Info.</h3>
 				</div>
 				<!-- /row -->
 			</div>
@@ -23,105 +23,56 @@
 	 CONTACT FORMS
 	 ***************************************************************************************************************** -->
 
-		<div class="container mtb">
-			<div class="row">
-				<div class="col-sm-12 col-md-12 col-lg-12">
-					<div th:if="${param.updatedUser}" class="alert alert-success"
-						role="alert">
-						<strong>User updated successfully.</strong>
+		<div class="container mtb">		
+		
+		<div class="row">
+		<div class="col-xs-12 col-sm-6 col-md-12">
+		<div th:if="${updatedPhysician}" class="alert alert-success" role="alert">
+					<strong>Physician updated successfully.</strong>
 					</div>
-					<div class="panel panel-info">
-						<div class="panel-heading">
-							<button type="submit" value="" class="btn btn-theme">Print</button>
-							<!-- <h3 class="panel-title">Print</h3> -->
-						</div>
-						<div class="panel-body">
-							<div class="row">
-								<div class="col-md-3 col-lg-3 " align="center">
-									<img alt="User Pic"
-										th:src="@{/image/user/}+${customer.id}+'.png'"
-										class="img-rounded img-responsive" />
-								</div>
-
-								<div class=" col-md-9 col-lg-9 ">
-									<table
-										class="table-bordred table-striped table table-user-information">
-										<tbody>
-											<tr>
-												<td>ID:</td>
-												<td th:text="${customer.id}"></td>
-											</tr>
-											<tr>
-												<td>First Name:</td>
-												<td th:text="${customer.firstName}"></td>
-											</tr>
-											<tr>
-												<td>Last Name:</td>
-												<td th:text="${customer.lastName}"></td>
-											</tr>
-											<tr>
-												<td>Email Address:</td>
-												<td th:text="${customer.email}"></td>
-											</tr>
-											<tr>
-												<td>Username:</td>
-												<td th:text="${customer.username}"></td>
-											</tr>
-											<tr>
-												<td>Account Active:</td>
-												<td th:text="${customer.enabled}"></td>
-											</tr>
-											<tr>
-												<td>Roles:</td>
-												<td th:each="role : ${customer.customerRoles}"><span
-													th:text="${role.getRole().getName()}"></span></td>
-											</tr>
-											<tr>
-												<td>Phone:</td>
-												<td th:text="${customer.phone}"></td>
-											</tr>
-											<tr>
-												<td>Gender:</td>
-												<td th:text="${customer.gender}"></td>
-											</tr>
-											<tr>
-												<td>Street Address:</td>
-												<td th:text="${customer.streetAddress}"></td>
-											</tr>
-											<tr>
-												<td>City:</td>
-												<td th:text="${customer.city}"></td>
-											</tr>
-											<tr>
-												<td>Zip Code:</td>
-												<td th:text="${customer.zipCode}"></td>
-											</tr>
-
-
-										</tbody>
-									</table>
-								</div>
+			<div class="well well-sm">
+				<div class="row">
+					<div class="col-sm-6 col-md-2">
+						<img th:src="@{/image/physician/}+${physician.id}+'.png'"
+										class="img-rounded img-responsive"  draggable="false" />
+					</div>
+					<div class="col-sm-6 col-md-4">
+						<h4 th:text="${physician.firstName +' '+physician.lastName}"></h4>
+						
+							<p>Email: <span th:text="${physician.email}"></span></p>
+							<p>Active: <span th:text="${physician.enabled}"></span></p>
+							<p>Street Address: <span th:text="${physician.streetAddress}"></span></p>
+							<p>City: <span th:text="${physician.city}"></span></p>
+							<p>Zip Code: <span th:text="${physician.zipCode}"></span></p>
+						
+					</div>
+					<div class="col-sm-6 col-md-6">
+						<h4>Legal</h4>
+						<p>License Number: <span th:text="${physician.licenseNumber}"></span></p>
+						<p>NPI Number: <span th:text="${physician.npiNumber}"></span></p>
+					</div>
+					<div class="col-sm-6 col-md-12">
+						<div class="row nav">
+							<div class="col-md-12" style="margin: 0px;">
+								<hr/>
+								<span class="pull-left"><button type="button" class="btn btn-sm btn-info"
+									data-toggle="modal" data-target=".myModal"><i
+									class="glyphicon glyphicon-edit"></i>Edit</button></span>
+								<span class="pull-right"><button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target=".myModalDelete"><i
+									class="glyphicon glyphicon-remove"></i>Delete</button></span>
 							</div>
 						</div>
-						<div class="panel-footer">
-							<a data-original-title="Broadcast Message" data-toggle="tooltip"
-								type="button" class="btn btn-sm btn-primary"><i
-								class="glyphicon glyphicon-envelope"></i>Message</a> <span
-								class="pull-right">
-								<button type="button" class="btn btn-sm btn-info"
-									data-toggle="modal" data-target=".myModal"><i
-									class="glyphicon glyphicon-edit"></i>Edit</button>
-
-								<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target=".myModalDelete"><i
-									class="glyphicon glyphicon-remove"></i>Delete</button>
-							</span>
-						</div>
-
 					</div>
 				</div>
 			</div>
-
-
+		</div>
+	</div>
+	
+	
+	
+			
+			
+			
 				<!-- Modal -->
 				<div class="modal fade myModal" id="" role="dialog">
 					<div class="modal-dialog modal-lg">
@@ -130,12 +81,12 @@
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title">Edit Profile</h4>
+								<h4 class="modal-title">Edit Physician</h4>
 							</div>
 							<div class="modal-body">
 								<div class="col-md-12" sec:authorize="hasRole('ROLE_ADMIN')">
-									<form th:action="@{/updateUser}" method="post"
-										th:object="${customer}" enctype="multipart/form-data"
+									<form th:action="@{/updatePhysician}" method="post"
+										th:object="${physician}" enctype="multipart/form-data"
 										class="form-horizontal">
 										<fieldset>
 											<input type="hidden" th:field="*{id}"/>
@@ -174,7 +125,7 @@
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-md-4 control-label">Account Active</label>
+												<label class="col-md-4 control-label">Active</label>
 												<div class="col-md-4">
 													<select th:field="*{enabled}" class="form-control">
 														<option value="true">Yes</option>
@@ -193,31 +144,35 @@
 															placeholder="Email Address" class="form-control input-md" />
 													</div>
 													<b><span th:errors="*{email}" class="text-danger"></span></b>
-													<b><span th:if="${emailExist}" class="text-danger">
-															<b>Email already exists</b>
-													</span></b>
 												</div>
 											</div>
 
 											<div class="form-group">
-												<label class="col-md-4 control-label">Username</label>
+												<label class="col-md-4 control-label">License Number</label>
 												<div class="col-md-4">
 													<div class="input-group">
 														<div class="input-group-addon">
 															<i class="fa fa-user"></i>
 														</div>
-														<input type="text" th:field="*{username}"
-															placeholder="username" class="form-control input-md" />
+														<input type="text" th:field="*{licenseNumber}"
+															placeholder="License Number" class="form-control input-md"/>
 													</div>
-													<b><span th:errors="*{username}" class="text-danger"></span></b>
-													<b><span th:if="${usernameExist}" class="text-danger">
-															<b>Username already exists</b>
-													</span></b>
-												</div>
+													<b><span th:errors="*{licenseNumber}" class="text-danger"></span></b>
+													</div>
+											</div>
+											<div class="form-group">
+												<label class="col-md-4 control-label">NPI Number</label>
+												<div class="col-md-4">
+													<div class="input-group">
+														<div class="input-group-addon">
+															<i class="fa fa-user"></i>
+														</div>
+														<input type="text" th:field="*{npiNumber}"
+															placeholder="NPI Number" class="form-control input-md"/>
+													</div>
+													</div>
 											</div>
 
-											<input type="hidden" th:field="*{password}"
-												placeholder="Password" class="form-control input-md" />
 											<div class="form-group">
 												<label class="col-md-4 control-label" for="Father">Phone</label>
 												<div class="col-md-4">
@@ -232,16 +187,6 @@
 												</div>
 											</div>
 
-											<div class="form-group">
-												<label class="col-md-4 control-label">Gender</label>
-												<div class="col-md-4">
-													<select th:field="*{gender}" class="form-control">
-														<option value="male">male</option>
-														<option value="female">female</option>
-														<option value="other">other</option>
-													</select>
-												</div>
-											</div>
 											<div class="form-group">
 												<label class="col-md-4 control-label col-xs-12">Address</label>
 												<div class="col-md-2  col-xs-4">
@@ -299,9 +244,9 @@
         </button>
       </div>
       <div class="modal-body">
-        Are you sure you want to delete user <span th:text="${customer.firstName+' '+customer.lastName}"></span>?  <br></br><br></br>
+        Are you sure you want to delete doctor <span th:text="${physician.firstName+' '+physician.lastName}"></span>?  <br></br><br></br>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <a th:href="@{/deleteUser(id=${customer.id})}" type="submit" class="btn btn-danger">Delete</a>
+        <a th:href="@{/deletePhysician(id=${physician.id})}" type="submit" class="btn btn-danger">Delete</a>
       </div>
       <div class="modal-footer">
       </div>

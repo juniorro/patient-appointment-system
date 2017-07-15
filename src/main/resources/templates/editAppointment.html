@@ -12,7 +12,7 @@
 		<div id="blue">
 			<div class="container">
 				<div class="row">
-					<h3>New Appointment.</h3>
+					<h3>Edit Appointment.</h3>
 				</div>
 				<!-- /row -->
 			</div>
@@ -31,7 +31,7 @@
 
 						<form th:action="@{/saveNewAppointment}" method="post"
 							th:object="${appointment}" role="form">
-
+							<input type="hidden" th:field="*{id}"/>
 							<div class="form-group">
 							<label for="InputEmail1">From Date *</label> 
 								<b><span th:errors="*{fromDate}" class="text-danger"></span></b>

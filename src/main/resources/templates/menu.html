@@ -12,14 +12,14 @@
 <meta name="author" content="" />
 <link rel="shortcut icon" href="assets/ico/favicon.ico" />
 
-<title>SOLID HOMECARE, INC.</title>
+<title>BEREA HOMECARE, INC.</title>
 
 <!-- Bootstrap core CSS -->
-<link href="assets/css/bootstrap.css" rel="stylesheet" />
-<link href="assets/css/font-awesome.min.css" rel="stylesheet" />
-
 <!-- Custom styles for this template -->
+<link href="assets/css/bootstrap.css" rel="stylesheet" />
+
 <link href="assets/css/style.css" rel="stylesheet" />
+<link href="assets/css/font-awesome.min.css" rel="stylesheet" />
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
@@ -41,7 +41,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" th:href="@{/welcome}">SOLID HOMECARE,
+				<a class="navbar-brand" th:href="@{/welcome}">BEREA HOMECARE,
 					INC.</a>
 			</div>
 			<div class="navbar-collapse collapse navbar-right">
@@ -52,74 +52,36 @@
 							<li><a th:href="@{/newUser}">NEW USER</a></li>
 							<li role="presentation" class="divider"></li>
 							<li><a th:href="@{/users}">USER SEARCH</a></li>
-							<li role="presentation" class="divider"></li>
-							<li><a href="single-post.html">USER ROLE</a></li>
-							<li role="presentation" class="divider"></li>
-							<li><a href="single-post.html">PERMISSIONS</a></li>
-							<!-- <li><a href="portfolio.html">PORTFOLIO</a></li>
-                <li><a href="single-project.html">SINGLE PROJECT</a></li> -->
 						</ul></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">PATIENTS<b class="caret"></b></a>
+						data-toggle="dropdown">PATIENT<b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li><a th:href="@{/newPatient}">NEW PATIENT</a></li>
 							<li role="presentation" class="divider"></li>
 							<li><a th:href="@{/patients}">SEARCH PATIENTS</a></li>
-							<li role="presentation" class="divider"></li>
-							<li><a href="single-post.html">PATIENT MEDICATION </a></li>
-							<li role="presentation" class="divider"></li>
-							<li><a href="single-post.html">PATIENT DIAGNOSIS </a></li>
-							<!-- <li><a href="portfolio.html">PORTFOLIO</a></li>
-                <li><a href="single-project.html">SINGLE PROJECT</a></li> -->
 						</ul></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">PHYSICIANS<b class="caret"></b></a>
+						data-toggle="dropdown">PHYSICIAN<b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><a th:href="@{/newPhysician}">NEW PHYSICIANS</a></li>
+							<li><a th:href="@{/newPhysician}">NEW PHYSICIAN</a></li>
 							<li role="presentation" class="divider"></li>
 							<li><a th:href="@{/physicians}">SEARCH PHYSICIANS</a></li>
-							<li role="presentation" class="divider"></li>
-							<li><a href="blog.html">PHYSICIAN SPECIALTY</a></li>
-							<!-- <li><a href="portfolio.html">PORTFOLIO</a></li>
-                <li><a href="single-project.html">SINGLE PROJECT</a></li> -->
 						</ul></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">APPOINTMENTS<b class="caret"></b></a>
+						data-toggle="dropdown">APPOINTMENT<b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li><a th:href="@{/newAppointment}">NEW APPOINTMENT</a></li>
 							<li role="presentation" class="divider"></li>
 							<li><a th:href="@{/appointments}">SEARCH APPOINTMENT</a></li>
-							<li role="presentation" class="divider"></li>
-							<li><a href="single-post.html">PENDING APPROVAL</a></li>
-							<!-- <li><a href="portfolio.html">PORTFOLIO</a></li>
-                <li><a href="single-project.html">SINGLE PROJECT</a></li> -->
 						</ul></li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">SERVICES<b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="blog.html">NEW SERVICE</a></li>
-							<li role="presentation" class="divider"></li>
-							<li><a href="single-post.html">SEARCH SERVICE</a></li>
-							<!-- <li><a href="portfolio.html">PORTFOLIO</a></li>
-                <li><a href="single-project.html">SINGLE PROJECT</a></li> -->
-						</ul></li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">REPORTS<b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="blog.html">LOGIN</a></li>
-							<li role="presentation" class="divider"></li>
-							<li><a href="single-post.html">REGISTER</a></li>
-							<!-- <li><a href="portfolio.html">PORTFOLIO</a></li>
-                <li><a href="single-project.html">SINGLE PROJECT</a></li> -->
-						</ul></li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown">MY ACCOUNT<b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li sec:authorize="isAuthenticated()" style="cursor: pointer;"><a
 								th:href="@{/profile}" style="text-transform: uppercase;"
 								sec:authentication="name"></a></li>
+								<li role="presentation" class="divider"></li>
 							<li><a th:href="@{/logout}">LOGOUT</a></li>
-							<!-- <li><a href="portfolio.html"></a></li> -->
 						</ul></li>
 				</ul>
 			</div>
@@ -181,10 +143,22 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
 	<script type="text/javascript" charset="utf8"
 		src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
-		<script rel="stylesheet" type="text/css"
-		href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+		
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+		
 	
+ <script type="text/javascript">
+ $(document).ready(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+</script>
 
+ <script type="text/javascript">
+ $(document).ready(function () {
+                $('#datetimepicker2').datetimepicker();
+            });
+</script>
 
 
 	<script type="text/javascript">

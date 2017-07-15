@@ -33,4 +33,9 @@ public class AppointmentServiceImpl implements AppointmentService {
 		return appointmentRepo.save(appointment);
 	}
 
+	@Override
+	public Appointment getOne(Long id) {
+		return appointmentRepo.findOne(id);
+	}
+
 }

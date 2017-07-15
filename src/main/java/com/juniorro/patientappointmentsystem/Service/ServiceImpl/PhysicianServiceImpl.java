@@ -45,4 +45,9 @@ public class PhysicianServiceImpl implements PhysicianService {
 		return physicianRepo.save(physician);
 	}
 
+	@Override
+	public void delete(long id) {
+		physicianRepo.delete(id);
+	}
+
 }

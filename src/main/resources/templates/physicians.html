@@ -26,6 +26,9 @@
 					<div th:if="${newPhysicianSuccess}" class="alert alert-success" role="alert">
 					<strong>New physician added successfully.</strong>
 					</div>
+					<div th:if="${physicianDelete}" class="alert alert-success" role="alert">
+					<strong>Physician deleted successfully.</strong>
+					</div>
 						<table id="myTable" class="table table-bordred table-striped table-bordered">
 							<thead>
 								<tr>
@@ -51,10 +54,8 @@
 									<td th:text="${physician.licenseNumber}"></td>
 									<td th:text="${physician.npiNumber}"></td>
 									<td class="td-actions">
-									<a href="#" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-search"></span>View</a>
-									<a th:href="@{/edit(id=${physician.id})}" class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a>
-									<a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span>Remove</a>
-								</td>					
+									<a th:href="@{/physicianProfile(id=${physician.id})}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-search"></span>View</a>
+									</td>					
 								</tr>
 							</tbody>
 						</table>

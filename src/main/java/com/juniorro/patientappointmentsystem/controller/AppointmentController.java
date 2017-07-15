@@ -33,7 +33,9 @@ public class AppointmentController {
 	private PatientService patientService;
 
 	@RequestMapping(value = "/appointments", method = RequestMethod.GET)
-	public ModelAndView appointments() {
+	public ModelAndView appointments(Model model) {
+		Appointment appointment = new Appointment();
+		model.addAttribute("appointment", appointment);
 		List<Appointment> appointments = appointmentService.allAppointments();
 		return new ModelAndView("appointments", "appointments", appointments);
 	}
@@ -61,32 +63,19 @@ public class AppointmentController {
 			return new ModelAndView("redirect:/appointments");
 		}
 	}
-
-	/*@RequestMapping(value = "/editPatient", method = RequestMethod.GET)
-	public ModelAndView editCustomer(Long id) {
-		Patient patient = patientService.getOne(id);
-		return new ModelAndView("editPatient", "patient", patient);
+	
+	@RequestMapping(value = "/editAppointment", method = RequestMethod.GET)
+	public ModelAndView editCustomer(Long id, Model model) {
+		Appointment appointment = appointmentService.getOne(id);
+		Physician physician = appointment.getPhysician();
+		Patient patient = appointment.getPatient();
+		List<Physician> physicians = physicianService.allPhysicians();
+		List<Patient> patients = patientService.allPatients();
+		model.addAttribute("patients", patients);
+		model.addAttribute("physicians", physicians);
+		model.addAttribute("physician", physician);
+		model.addAttribute("patient", patient);
+		return new ModelAndView("editAppointment", "appointment", appointment);
 	}
 
-	@RequestMapping(value = "/saveNewPatient", method = RequestMethod.POST)
-	public ModelAndView saveNewPatient(@Valid Patient patient, BindingResult result, Model model, final RedirectAttributes redirect) {
-		if (result.hasErrors()) {
-			return new ModelAndView("newPatient");
-		} else {
-			patientService.savePatient(patient);
-			redirect.addFlashAttribute("newPatientSuccess", true);
-			return new ModelAndView("redirect:/patients");
-		}
-	}
-
-	@RequestMapping(value = "/updatePatient", method = RequestMethod.POST)
-	public ModelAndView updateCustomer(@Valid Patient patient, BindingResult result) {
-		if (result.hasErrors()) {
-			return new ModelAndView("editPatient");
-		} else {
-			patientService.savePatient(patient);
-			return new ModelAndView("editPatient", "updatedPatient", true);
-		}
-	}
-*/
 }

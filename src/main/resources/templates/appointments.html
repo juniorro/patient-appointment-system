@@ -31,7 +31,7 @@
 				<div class="col-sm-12">
 					<div th:if="${newAppointmentSuccess}" class="alert alert-success"
 						role="alert">
-						<strong>New appointment added successfully.</strong>
+						<strong>Appointment updated successfully.</strong>
 					</div>
 					<table id="myTable"
 						class="table table-bordred table-striped table-bordered">
@@ -61,14 +61,9 @@
                                         <span class="label label-success" th:text="${appointment.status}"></span>
                                  </td>
 								<td th:text="${appointment.note}"></td>
-								<td class="td-actions"><a href="#"
+								<td class="td-actions"><a th:href="@{/editAppointment(id=${appointment.id})}"
 									class="btn btn-default btn-xs"><span
-										class="glyphicon glyphicon-search"></span>View</a> <a
-									th:href="@{/edit(id=${appointment.id})}"
-									class='btn btn-info btn-xs' href="#"><span
-										class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#"
-									class="btn btn-danger btn-xs"><span
-										class="glyphicon glyphicon-remove"></span>Remove</a></td>
+										class="glyphicon glyphicon-search"></span>View</a> </td>
 							</tr>
 						</tbody>
 					</table>

@@ -6,10 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 public class Physician {
@@ -44,6 +46,9 @@ public class Physician {
 	@NotNull(message = "Phone number is required")
 	private String phone;
 
+	@Transient
+	private MultipartFile profilePhoto;
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Patient patient;
 
@@ -52,7 +57,8 @@ public class Physician {
 	}
 
 	public Physician(String firstName, String lastName, String email, String licenseNumber, String npiNumber,
-			String streetAddress, String city, String zipCode, boolean enabled, String phone, Patient patient) {
+			String streetAddress, String city, String zipCode, boolean enabled, String phone,
+			MultipartFile profilePhoto, Patient patient) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -64,6 +70,7 @@ public class Physician {
 		this.zipCode = zipCode;
 		this.enabled = enabled;
 		this.phone = phone;
+		this.profilePhoto = profilePhoto;
 		this.patient = patient;
 	}
 
@@ -153,6 +160,14 @@ public class Physician {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public MultipartFile getProfilePhoto() {
+		return profilePhoto;
+	}
+
+	public void setProfilePhoto(MultipartFile profilePhoto) {
+		this.profilePhoto = profilePhoto;
 	}
 
 	public Patient getPatient() {
