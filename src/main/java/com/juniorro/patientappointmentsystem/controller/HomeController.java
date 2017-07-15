@@ -94,7 +94,7 @@ public class HomeController {
 		return "index";
 	}
 
-	@RequestMapping(value = "/welcome")
+	@RequestMapping(value = {"/welcome", "/"})
 	public String welcome(Model model) {
 		long patientCounts = patientService.count();
 		long physicianCounts = physicianService.count();
