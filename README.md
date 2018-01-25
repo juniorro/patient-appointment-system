@@ -9,7 +9,7 @@
 
 # INTRODUCTION
 
-Tough Care is a is a patient appointment system (healthcare) application system where schedules can be create for patients and physicians. New patients and physicians can be entered in the system. The system also manages patients and physicians information. New system users can also be added and managed. User roles delegates permissions of system users. It is built using Java, Spring Framework, Hibernate, MySQL database, Bootstrap, and Thymeleaf.
+Tough Care is a is a patient appointment system (healthcare) application system where schedules can be create for patients and physicians. New patients and physicians can be entered in the system. The system also manages patients and physicians information. New system users can also be added and managed. User roles delegate permissions of system users. It is built using Java, Spring Framework, Hibernate, MySQL database, Bootstrap, and Thymeleaf.
 
 
 # REQUIREMENTS
