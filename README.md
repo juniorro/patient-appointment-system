@@ -42,4 +42,9 @@ MySql Server </br>
 
 # VISUAL
 
-![alt tag](https://github.com/juniorro/computer-store/blob/master/admincp-backend/snapshot1.PNG)
+![alt tag](https://github.com/juniorro/patient-appointment-system/blob/master/visual1.PNG) </br>
+![alt tag](https://github.com/juniorro/patient-appointment-system/blob/master/visual2.PNG) </br>
+![alt tag](https://github.com/juniorro/patient-appointment-system/blob/master/visual3.PNG) </br>
+![alt tag](https://github.com/juniorro/patient-appointment-system/blob/master/visual4.PNG) </br>
+![alt tag](https://github.com/juniorro/patient-appointment-system/blob/master/visual5.PNG) </br>
+
